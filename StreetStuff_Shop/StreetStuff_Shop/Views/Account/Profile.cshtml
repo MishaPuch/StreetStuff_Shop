@@ -1,0 +1,85 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <!-- Подключение пользовательского CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    @await Html.PartialAsync("_Layout_header")
+   </div>
+        <main class="container my-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle mb-3">
+                   
+                    <hr />
+                    <br />
+                
+                <a href="" class="btn btn-outline-secondary font-norm">History</a>
+
+                <button class="btn btn-primary">Change</button>
+
+
+
+            </div>
+                <div class="col-md-8 ">
+                    <div class="col-md-8 ">
+
+                    <p>Email</p>
+                    <p>Addres</p>
+                    <p class="text-muted">Passwod</p>
+                    </div>
+                    <br />
+                <br />
+
+                    <hr />
+                           
+                    <br />
+
+                    <h3>Liked</h3>
+                   <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                            <h5>Товар 1</h5>
+                            <p>1000 руб.</p>
+                            <button class="btn btn-outline-primary">Добавить в корзину</button>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                            <h5>Товар 2</h5>
+                            <p>2000 руб.</p>
+                            <button class="btn btn-outline-primary">Добавить в корзину</button>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                            <h5>Товар 3</h5>
+                            <p>3000 руб.</p>
+                            <button class="btn btn-outline-primary">Добавить в корзину</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
+                    
+
+
+
+                        <!-- Подключение Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

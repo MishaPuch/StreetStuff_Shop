@@ -1,46 +1,69 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  
+
+<style>
+@@import url('https://fonts.cdnfonts.com/css/draconian-typewriter');
+        @@import url('https://fonts.cdnfonts.com/css/bomber-wall');
+        
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StreetStuff_Shop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StreetStuff_Shop.styles.css" asp-append-version="true" />
+    
+   
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StreetStuff_Shop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+
+    <div class="container">
+       @await Html.PartialAsync("_Layout_header")
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+                           
+
+                    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center justify-content bg-body-tertiary ">
+
+                <div class="col-md-5 p-lg-5 mx-auto my-5 bomber">
+                            
+                            <h1 class="display-4 fw-normal">Punny headline</h1>
+                            <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
+                            <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+                        </div>
+                        <div class="product-device shadow-sm d-none d-md-block"></div>
+                        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+
+                    </div>
+                <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3 justify-content">
+                   
+                    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+
+                            <h2 class="display-5">Another headline</h2>
+ 
+                             <img src="~/photos/logo/text.jpg" width="300px" />                    
+
+                    </div>
+
+                
+            </div>
+
+
+
+                <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+
+
         </main>
     </div>
+    
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - StreetStuff_Shop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

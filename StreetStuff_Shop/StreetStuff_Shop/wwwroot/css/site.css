@@ -12,7 +12,58 @@ html {
   position: relative;
   min-height: 100%;
 }
-
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: #450797 !important;
+    font-family: 'Draconian Typewriter', sans-serif;
+}
+
+.graffity {
+    color: #450797;
+    text-decoration: none
+}
+.bomber {
+
+    font-family: 'Bomber Wall Regular', sans-serif;
+}
+.font-norm{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #450797 !important;
+
+}
+.nav-link {
+    color: #450797!important;
+}
+.btn {
+    color: #450797 !important;
+    background-color: white !important;
+    border-color: #450797 !important;
+}
+.btn-primary {
+    color: white !important;
+    background-color: #450797 !important;
+    border-color: #450797 !important;
+}
+.justify-content {
+    display: flex;
+    justify-content: center;
+    margin:20px;
+}
+.BcGround {
+    position: relative;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.border {
+    border-radius: 30px;
+}
+.loginForm1 {
+    width: 100%;
+    height: 100%;
+    margin: 10% auto;
+    text-align: center;
 }
