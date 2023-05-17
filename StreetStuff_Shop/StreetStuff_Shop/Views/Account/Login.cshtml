@@ -8,12 +8,15 @@
 
 
 <div class="justify-content loginForm1 graffity rounded c">    
-    <form method="" action="">
+    <form asp-controller="Account" asp-action="Login" method="post">
         <img class="image" src="~/photos/logo/fulllogo.jpg" width="200px" />
 
         <p>Email</p>
         <input type="email" name="email" placeholder="Write your email..." />
         <p>Password</p>
-        <input type="password" name="password" placeholder="Write your password..." />
+        <input class="fonm" type="password" name="password" placeholder="Write your password..." />
+        <br />
+        <br />
+        <input type="submit"  value="Check"/>
     </form>
 </div>

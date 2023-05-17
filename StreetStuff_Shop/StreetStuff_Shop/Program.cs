@@ -1,7 +1,11 @@
+using StreetStuff_Shop.DI;
+using StreetStuff_Shop.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IDbContext , DbContext>();
 
 var app = builder.Build();
 

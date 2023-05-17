@@ -1,15 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StreetStuff_Shop.Interfaces;
+using StreetStuff_Shop.Models;
+using StreetStuff_Shop.ViewModels;
 
 namespace StreetStuff_Shop.Controllers
 {
     public class AccountController : Controller
     {
+        private IDbContext db;
+        public AccountController(IDbContext db) 
+        { 
+            this.db = db;
+        }
+
         public ActionResult Login()
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Login(LoginViewModel login)
+        {
+            User ? user=db.AppDbContext().Users.FirstOrDefault(u=>u.Email==login.email &&u.Password==login.password );
+            if (user != null)
+            {
+                return RedirectToAction("index", "home");
+            }
+            else
+            {
+                return Redirect("Login");
+            }
+        }
         // GET: AccountController
         public ActionResult Index()
         {

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using System.Diagnostics;
 
@@ -7,15 +9,20 @@ namespace StreetStuff_Shop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IDbContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        
+        public HomeController(ILogger<HomeController> logger , IDbContext db)
         {
+            this.db = db;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<User> users=db.AppDbContext().Users.ToList();
+            
+            return View(users);
         }
 
         public IActionResult Privacy()
@@ -23,11 +30,7 @@ namespace StreetStuff_Shop.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
         public ActionResult About()
         {
             return View();

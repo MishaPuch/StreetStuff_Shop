@@ -1,5 +1,10 @@
 ﻿@{
+    IEnumerable<User> users = Model;
+
     ViewData["Title"] = "Home Page";
 }
 
-
+@foreach(User user in Model)
+{
+    <p>@user.FirstName @user.LastName</p>
+}
