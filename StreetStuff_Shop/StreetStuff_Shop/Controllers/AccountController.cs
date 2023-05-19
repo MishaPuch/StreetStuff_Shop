@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
+using System.Text.Json.Serialization;
 
 namespace StreetStuff_Shop.Controllers
 {
     public class AccountController : Controller
     {
         private IDbContext db;
-        public AccountController(IDbContext db) 
+        private IUserService userService;
+        public AccountController(IDbContext db ,IUserService userService) 
         { 
             this.db = db;
+            this.userService = userService;
         }
 
         public ActionResult Login()
@@ -21,9 +25,10 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            User ? user=db.AppDbContext().Users.FirstOrDefault(u=>u.Email==login.email &&u.Password==login.password );
+            User? user = userService.FoundUser(login.email, login.password);
             if (user != null)
             {
+                userService.RegistrUserInSession(user);
                 return RedirectToAction("index", "home");
             }
             else
@@ -48,6 +53,48 @@ namespace StreetStuff_Shop.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult CreateAccount(CreateUserViewModel user)
+        {
+            if(user != null)
+            {
+                if (user.Password == user.ConfirmPassword)
+                {
+                    User user1 = new User()
+                    {
+                        Id = db.AppDbContext().Users.Count() + 1,
+                        Email = user.Email,
+                        Password = user.Password,
+                        Photo = user.Photo,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        ShippingAddress = user.ShippingAddress,
+                        PhoneNumber = user.PhoneNumber
+                    };
+                    userService.CreateUser(user1);
+                    userService.RegistrUserInSession(user1);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
+        public ActionResult Logout()
+        {
+
+            userService.LogoutUser();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
 
         // POST: AccountController/Create
         [HttpPost]
@@ -64,46 +111,6 @@ namespace StreetStuff_Shop.Controllers
             }
         }
 
-        // GET: AccountController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AccountController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

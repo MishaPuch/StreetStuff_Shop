@@ -2,15 +2,36 @@
     Layout = "_Layout_login";
 }
 <div class="justify-content loginForm1 graffity rounded c">
+    
 
-    <form method="" action="">
-        <img class="image" src="~/photos/logo/fulllogo.jpg" width="200px" />
+    <form method="post" action="CreateAccount">
+        <p>You can upload photo</p>
+        <input id="fileInput" type="file" name="Photo" />
+        <br />
 
+         
+        <p>Your First Name</p>
+        <input type="text" name="FirstName"  />
+        <p>Your Last Name</p>
+        <input type="text" name="LastName" />
         <p>Email</p>
-        <input type="email" name="email" placeholder="Write your email..." />
+        <input type="email" name="Email" placeholder="Write your email..." />
+        <p>Shipping Addres</p>
+        <textarea name="ShippingAddress" placeholder="Write your Addres..."></textarea>
         <p>Password</p>
-        <input type="password" name="password" placeholder="Write your password..." />
-        <p>Smth</p>
-        <input type="text" name="text" placeholder="Write your text..." />
+        <input type="password" name="Password" placeholder="Write your password..." />
+        <p>Confirm Password</p>
+        <input type="password" name="ConfirmPassword" placeholder="Confirm your password..." />
+        <input type="submit" />
+
     </form>
+    <script>
+        var fileInput = document.getElementById('fileInput');
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files.length > 0) {
+                fileInput.setAttribute('value', 'Ваши слова');
+            }
+        });
+    </script>
+
 </div>

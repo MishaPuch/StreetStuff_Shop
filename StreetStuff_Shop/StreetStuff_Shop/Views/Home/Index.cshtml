@@ -1,10 +1,18 @@
-﻿@{
-    IEnumerable<User> users = Model;
+﻿@using Newtonsoft.Json;
+@{
 
     ViewData["Title"] = "Home Page";
-}
 
-@foreach(User user in Model)
+    var session = HttpContextAccessor.HttpContext.Session;
+    var currentUser = session.GetString("CurrentUser");
+
+    User? user = null;
+    if (!string.IsNullOrEmpty(currentUser))
+    {
+        user = JsonConvert.DeserializeObject<User>(currentUser);
+    }
+}
+@if (user != null)
 {
-    <p>@user.FirstName @user.LastName</p>
+    <h1>@user.FirstName @user.LastName</h1>
 }

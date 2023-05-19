@@ -67,3 +67,35 @@ body {
     margin: 10% auto;
     text-align: center;
 }
+.AddAva {
+ 
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    margin: 5px;
+
+    cursor: pointer;
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    border: 3px solid #0af;
+    transition: background ease-out 200ms;
+}
+
+
+    .AddAva:hover {
+        background-color: #e6e6e6;
+        border-color: #999;
+    }
+}
+
+#avatar {
+    background-color: antiquewhite;
+    height: 200px;
+    width: 200px;
+    border: 3px solid #0af;
+    border-radius: 50%;
+    transition: background ease-out 200ms;
+}
+

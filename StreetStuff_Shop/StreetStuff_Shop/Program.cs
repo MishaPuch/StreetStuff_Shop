@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using StreetStuff_Shop.DI;
 using StreetStuff_Shop.Interfaces;
 
@@ -6,7 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDbContext , DbContext>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +29,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+    var session = HttpContextAccessor.HttpContext.Session;
+    var currentUser = session.GetString("CurrentUser");
+
+    User? user = null;
+    if (!string.IsNullOrEmpty(currentUser))
+    {
+        user = JsonConvert.DeserializeObject<User>(currentUser);
+    }
+}
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -30,12 +41,19 @@
                 <li><a class="nav-link px-2 graffity"asp-area="" asp-controller="Account" asp-action="Profile">Account</a></li>
                 <li><a class="nav-link px-2 graffity" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
             </ul>
-
-            <div class="col-md-3 text-end">
-
-            <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/basket.png" width="30px" /></a>
-            <a type="button" class="btn btn-outline-primary me-2 font-norm" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-            <a type="button" class="btn btn-primary font-norm" asp-area="" asp-controller="Account" asp-action="CreateAccount">Sign-up</a>
+        <div class="col-md-3 text-end">
+            @if (user != null)
+            {
+                <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/basket.png" width="30px" /></a>
+                <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/@user.Photo" alt="Photo" width="30px" /></a>
+                <a type="button" class="btn btn-outline-primary me-2 font-norm" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+            }
+            else
+            {
+                <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/basket.png" width="30px" /></a>
+                <a type="button" class="btn btn-outline-primary me-2 font-norm" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                <a type="button" class="btn btn-primary font-norm" asp-area="" asp-controller="Account" asp-action="CreateAccount">Sign-up</a>
+            }
             </div>
         </header>
     </body>

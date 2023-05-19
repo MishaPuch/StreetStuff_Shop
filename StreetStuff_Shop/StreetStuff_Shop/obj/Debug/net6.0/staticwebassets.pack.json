@@ -245,6 +245,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\logo\\ava.jpg",
+      "PackagePath": "staticwebassets\\photos\\logo\\ava.jpg"
+    },
+    {
       "Id": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\logo\\basket.png",
       "PackagePath": "staticwebassets\\photos\\logo\\basket.png"
     },

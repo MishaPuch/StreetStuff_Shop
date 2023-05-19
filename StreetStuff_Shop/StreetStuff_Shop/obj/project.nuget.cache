@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lNPV2XM8G/BAMuzMEr4kGtW9BPfC3KtBFsNQlavV7Y8AX8dn7NXLDBZsyP2KnVlZXhn67HTB/yvG+JpjPfWwxQ==",
+  "dgSpecHash": "KnG6uFrFmGBy2cazMS0q3KmIBwMBqWw5uNzIK7THG5/BqXjVfFX4UWut/5Yg7CBYUiKxAN/HSX7kvKltK8SqMw==",
   "success": true,
   "projectFilePath": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.csproj",
   "expectedPackageFiles": [
@@ -43,6 +43,7 @@
     "C:\\Users\\misha\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\misha\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

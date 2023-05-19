@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AExHmdNBCkXeglVu6AZtGoveIw/sIm11/NLgGo2lXNE=",
+  "Hash": "EJ195GemDmX2sHHHvA+SSEQrZ9eii3B8vnf6h68bCpA=",
   "Source": "StreetStuff_Shop",
   "BasePath": "_content/StreetStuff_Shop",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\logo\\ava.jpg",
+      "SourceId": "StreetStuff_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\",
+      "BasePath": "_content/StreetStuff_Shop",
+      "RelativePath": "photos/logo/ava.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\logo\\ava.jpg"
     },
     {
       "Identity": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\logo\\basket.png",
