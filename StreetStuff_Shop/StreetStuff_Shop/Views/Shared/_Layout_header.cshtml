@@ -45,7 +45,7 @@
             @if (user != null)
             {
                 <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/basket.png" width="30px" /></a>
-                <a type="button" class="me-2 " asp-area="" asp-controller="Home" asp-action="Basket"><img src="~/photos/logo/@user.Photo" alt="Photo" width="30px" /></a>
+                <a type="button" class="me-2 " asp-area="" asp-controller="Account" asp-action="Profile"><img src="~/photos/logo/@user.Photo" alt="Photo" width="30px" /></a>
                 <a type="button" class="btn btn-outline-primary me-2 font-norm" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
             }
             else

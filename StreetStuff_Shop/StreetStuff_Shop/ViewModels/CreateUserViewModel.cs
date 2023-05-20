@@ -4,6 +4,6 @@ namespace StreetStuff_Shop.ViewModels
 {
     public class CreateUserViewModel:User
     {
-        public string ConfirmPassword { get; set; }
+        public string? ConfirmPassword { get; set; }
     }
 }

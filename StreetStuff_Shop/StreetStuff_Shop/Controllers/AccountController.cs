@@ -12,6 +12,7 @@ namespace StreetStuff_Shop.Controllers
     {
         private IDbContext db;
         private IUserService userService;
+        
         public AccountController(IDbContext db ,IUserService userService) 
         { 
             this.db = db;
@@ -43,9 +44,13 @@ namespace StreetStuff_Shop.Controllers
         }
 
         // GET: AccountController/Details/5
-        public ActionResult Profile(int id)
+        public ActionResult Profile()
         {
-            return View();
+            ProfileViewModel profile = new ProfileViewModel();
+            profile.products=db.AppDbContext().Products.ToList<Product>();
+            profile.liked=db.AppDbContext().Liked.ToList<Liked>();
+
+            return View(profile);
         }
 
         // GET: AccountController/Create

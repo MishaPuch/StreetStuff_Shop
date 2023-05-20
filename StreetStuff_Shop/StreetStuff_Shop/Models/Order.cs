@@ -11,8 +11,6 @@ public partial class Order
 
     public string? Status { get; set; }
 
-    public decimal? TotalSum { get; set; }
-
     public DateTime? OrderDate { get; set; }
 
     public int? ProductId { get; set; }

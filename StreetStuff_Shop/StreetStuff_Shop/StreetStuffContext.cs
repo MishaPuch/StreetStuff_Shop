@@ -42,6 +42,8 @@ public partial class StreetStuffContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+
         modelBuilder.Entity<Admin>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Admin__719FE4E8EFAC5227");
@@ -139,7 +141,6 @@ public partial class StreetStuffContext : DbContext
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.TotalSum).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)

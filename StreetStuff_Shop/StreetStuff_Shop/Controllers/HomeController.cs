@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
+using StreetStuff_Shop.ViewModels;
 using System.Diagnostics;
 
 namespace StreetStuff_Shop.Controllers
@@ -24,12 +25,7 @@ namespace StreetStuff_Shop.Controllers
             
             return View(users);
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+                
        
         public ActionResult About()
         {
@@ -37,7 +33,11 @@ namespace StreetStuff_Shop.Controllers
         }
         public ActionResult Basket() 
         { 
-            return View();
+            BasketViewModel model = new BasketViewModel();
+            model.products = db.AppDbContext().Products.ToList();
+            model.carts = db.AppDbContext().Carts.ToList();
+
+            return View(model);
         }
     }
 }

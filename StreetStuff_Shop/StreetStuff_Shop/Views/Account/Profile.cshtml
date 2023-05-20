@@ -1,8 +1,13 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model StreetStuff_Shop.ViewModels.ProfileViewModel
 @{
+
     Layout = null;
+    User? user = UserService.GetUserFromSession();
+    IEnumerable<Product> products = Model.products;
+    IEnumerable<Liked> liked = Model.liked;
 }
 
 <!DOCTYPE html>
@@ -17,66 +22,82 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-    @await Html.PartialAsync("_Layout_header")
-   </div>
+
+    @if (user != null)
+    {
+
+
+        <div class="container">
+            @await Html.PartialAsync("_Layout_header")
+        </div>
+
+
         <main class="container my-5">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle mb-3">
-                   
+                    <img src="~/photos/logo/@user.Photo" alt="Avatar" class="rounded-circle mb-3 avatar">
+
                     <hr />
                     <br />
-                
-                <a href="" class="btn btn-outline-secondary font-norm">History</a>
 
-                <button class="btn btn-primary">Change</button>
+                    <a href="" class="btn btn-outline-secondary font-norm">History</a>
+
+                    <button class="btn btn-primary">Change</button>
+
+                </div>
 
 
-
-            </div>
                 <div class="col-md-8 ">
-                    <div class="col-md-8 ">
 
-                    <p>Email</p>
-                    <p>Addres</p>
-                    <p class="text-muted">Passwod</p>
-                    </div>
+                    <p>Email : @user.Email</p>
+                    <p>Addres : @user.ShippingAddress</p>
+                    <p class="text-muted">Passwod : @user.Password</p>
+
                     <br />
-                <br />
+                    <br />
 
                     <hr />
-                           
+
                     <br />
 
                     <h3>Liked</h3>
-                   <div class="row">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                            <h5>Товар 1</h5>
-                            <p>1000 руб.</p>
-                            <button class="btn btn-outline-primary">Добавить в корзину</button>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                            <h5>Товар 2</h5>
-                            <p>2000 руб.</p>
-                            <button class="btn btn-outline-primary">Добавить в корзину</button>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                            <h5>Товар 3</h5>
-                            <p>3000 руб.</p>
-                            <button class="btn btn-outline-primary">Добавить в корзину</button>
-                        </div>
+                    <div class="row">                    
+                        @foreach (var wear in products)
+                        {
+                            if (liked.FirstOrDefault(l => (l.ProductId == wear.ProductId) && (l.UserId == user.Id)) != null)
+                            {
+
+
+                                <div class="col-md-4">
+                                    <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                                    <h5>@wear.ProductName</h5>
+                                    <p>@wear.Description</p>
+                                    <p>@wear.Brand</p>
+                                    <p>@wear.Price</p>
+                                    <button class="btn btn-outline-primary">Add to Card</button>
+                                </div>
+                            }
+                        }
                     </div>
-                    
+
                 </div>
             </div>
+
         </main>
-                    
+    }
+    else
+    {
+        <div class="container">
+            @await Html.PartialAsync("_Layout_header")
+        </div>
+        
+        <main class="container my-5">
+            <div>
+                <h1>You have to login </h1>
+            </div>
+        </main>
 
-
+    }
 
                         <!-- Подключение Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>

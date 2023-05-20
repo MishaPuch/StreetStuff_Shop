@@ -31,6 +31,18 @@ namespace StreetStuff_Shop.DI
             return user;
         }
 
+        public User GetUserFromSession()
+        {
+            var session = httpContextAccessor.HttpContext.Session;
+            var currentUser = session.GetString("CurrentUser");
+
+            if (!string.IsNullOrEmpty(currentUser))
+            {
+                return JsonConvert.DeserializeObject<User>(currentUser);
+            }
+            return null;
+        }
+
         public void LogoutUser()
         {
             var HttpContext = httpContextAccessor.HttpContext;

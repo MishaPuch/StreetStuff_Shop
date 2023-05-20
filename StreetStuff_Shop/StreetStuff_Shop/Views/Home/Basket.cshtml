@@ -1,8 +1,15 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model StreetStuff_Shop.ViewModels.BasketViewModel
 @{
     Layout = null;
+
+    User? user = UserService.GetUserFromSession();
+    IEnumerable<Product> products = Model.products;
+    IEnumerable<Cart> carts = Model.carts;
+    decimal? sum=0;
+
 }
 <div class="container">
     @await Html.PartialAsync("_Layout_header")
@@ -14,49 +21,43 @@
             
                 
                         <div class="col-md-9">
-                            <h2>Корзина</h2>
+                            <h2>Cart</h2>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                                    <h5>Товар 1</h5>
-                                    <p>1000 руб.</p>
-                                    <div class="input-group mb-3">
-                                        <button class="btn btn-outline-secondary" type="button">-</button>
-                                        <input type="text" class="form-control" value="1" aria-label="Quantity">
-                                        <button class="btn btn-outline-secondary" type="button">+</button>
-                                    </div>
-                                    <button class="btn btn-danger">Удалить из корзины</button>
+
+                      @*foreach(Product wear in products)
+                        {
+                        if ( carts.FirstOrDefault(o=>(o.ProductId==wear.ProductId)&&(o.UserId==user.Id) ) !=null)*@
+                        @foreach(var cart in carts) 
+                        {
+                            if(cart.UserId==user.Id)
+                            {     
+                                Product wear = products.FirstOrDefault(p => p.ProductId == cart.ProductId);
+
+
+                                <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                                <h5>@wear.ProductName</h5>
+                                <p>@wear.Price</p>
+                                <div class="input-group mb-3">
+                                    <button class="btn btn-outline-secondary" type="button">-</button>
+                                    <input type="text" class="form-control" value="@cart.Quantity" aria-label="Quantity">
+                                    <button class="btn btn-outline-secondary" type="button">+</button>
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                                    <h5>Товар 2</h5>
-                                    <p>2000 руб.</p>
-                                    <div class="input-group mb-3">
-                                        <button class="btn btn-outline-secondary" type="button">-</button>
-                                        <input type="text" class="form-control" value="2" aria-label="Quantity">
-                                        <button class="btn btn-outline-secondary" type="button">+</button>
-                                    </div>
-                                    <button class="btn btn-danger">Удалить из корзины</button>
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                                    <h5>Товар 3</h5>
-                                    <p>3000 руб.</p>
-                                    <div class="input-group mb-3">
-                                        <button class="btn btn-outline-secondary" type="button">-</button>
-                                        <input type="text" class="form-control" value="1" aria-label="Quantity">
-                                        <button class="btn btn-outline-secondary" type="button">+</button>
-                                    </div>
-                                    <button class="btn btn-danger">Удалить из корзины</button>
-                                </div>
+                                <button class="btn btn-danger">Remove from Cart </button>
+
+                                sum+= wear.Price;
+                            } 
+                        }    
+                        <div class="col-md-4">
+                        </div>
+                                
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button class="btn btn-secondary">Продолжить покупки</button>
+                                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Продолжить покупки</a>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <p class="fw-bold">Итого: 6000 руб.</p>
+                                    <p class="fw-bold">Sum: @sum</p>
                                     <button class="btn btn-primary">Оформить заказ</button>
                                 </div>
                             </div>

@@ -3,14 +3,8 @@
 
     ViewData["Title"] = "Home Page";
 
-    var session = HttpContextAccessor.HttpContext.Session;
-    var currentUser = session.GetString("CurrentUser");
-
     User? user = null;
-    if (!string.IsNullOrEmpty(currentUser))
-    {
-        user = JsonConvert.DeserializeObject<User>(currentUser);
-    }
+    user = UserService.GetUserFromSession();
 }
 @if (user != null)
 {

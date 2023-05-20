@@ -16,6 +16,7 @@ body {
     margin-bottom: 60px;
     color: #450797 !important;
     font-family: 'Draconian Typewriter', sans-serif;
+    background:linear-gradient()
 }
 
 .graffity {
@@ -88,9 +89,9 @@ body {
         background-color: #e6e6e6;
         border-color: #999;
     }
-}
 
-#avatar {
+
+.avatar {
     background-color: antiquewhite;
     height: 200px;
     width: 200px;
