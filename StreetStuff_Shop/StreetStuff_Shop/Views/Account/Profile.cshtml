@@ -6,8 +6,8 @@
 
     Layout = null;
     User? user = UserService.GetUserFromSession();
-    IEnumerable<Product> products = Model.products;
-    IEnumerable<Liked> liked = Model.liked;
+    IEnumerable<Product>? products = Model.products;
+    IEnumerable<Liked>? liked = Model.liked;
 }
 
 <!DOCTYPE html>
@@ -37,7 +37,6 @@
                 <div class="col-md-3">
                     <img src="~/photos/logo/@user.Photo" alt="Avatar" class="rounded-circle mb-3 avatar">
 
-                    <hr />
                     <br />
 
                     <a href="" class="btn btn-outline-secondary font-norm">History</a>
@@ -56,7 +55,6 @@
                     <br />
                     <br />
 
-                    <hr />
 
                     <br />
 
@@ -69,12 +67,24 @@
 
 
                                 <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
+                                    <img src="~/photos/wear/@wear.Photo" alt="Product" class="mb-3">
                                     <h5>@wear.ProductName</h5>
                                     <p>@wear.Description</p>
                                     <p>@wear.Brand</p>
                                     <p>@wear.Price</p>
-                                    <button class="btn btn-outline-primary">Add to Card</button>
+                                    <form method="post" action="">
+                                         <input type="hidden" name="id" value="@wear.ProductId">
+                                         <button class="btn btn-outline-primary">Add to Card</button>
+                                    </form>
+                                    <br />
+                                    <br />
+                                    <form method="post" action="RemoveProductFromLiked">
+                                        <input type="hidden" name="ProductId" value="@wear.ProductId">
+                                        <input type="hidden" name="UserId" value="@user.Id">
+
+                                        <button class="btn btn-outline">Remove from Liked</button>
+                                    </form>
+
                                 </div>
                             }
                         }

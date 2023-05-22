@@ -52,6 +52,47 @@ namespace StreetStuff_Shop.Controllers
 
             return View(profile);
         }
+        [HttpPost]
+        public ActionResult AddProductToLiked(int id)
+        {
+            return Redirect("Profile");
+        }
+        [HttpPost]
+        public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
+        {
+            Liked liked = db.AppDbContext().Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
+            if (liked != null)
+            {
+                StreetStuffContext db = new StreetStuffContext();
+                     db.Liked.Remove(liked);
+                     db.SaveChanges();
+                
+            }
+            return Redirect("Profile");
+        }
+        [HttpPost]
+        public ActionResult AddProductToLiked(int ProductId, int UserId)
+        {
+            
+                StreetStuffContext db = new StreetStuffContext();
+            Liked liked = new Liked();
+
+            do
+            {
+                liked.Id = db.Liked.Count() + 1;
+            }
+            while (db.Liked.FirstOrDefault(l => l.Id == liked.Id)!=null);
+
+            liked.ProductId = ProductId;
+            liked.UserId = UserId;
+            
+                db.Liked.Add(liked);
+                db.SaveChanges();
+
+            
+            return Redirect("Profile");
+        }
+
 
         // GET: AccountController/Create
         public ActionResult CreateAccount()
@@ -76,6 +117,7 @@ namespace StreetStuff_Shop.Controllers
                         ShippingAddress = user.ShippingAddress,
                         PhoneNumber = user.PhoneNumber
                     };
+                    
                     userService.CreateUser(user1);
                     userService.RegistrUserInSession(user1);
                     return RedirectToAction("Index", "Home");
@@ -98,23 +140,10 @@ namespace StreetStuff_Shop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+       
 
 
-
-        // POST: AccountController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         
     }

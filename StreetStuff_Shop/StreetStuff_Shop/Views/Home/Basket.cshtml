@@ -1,74 +1,87 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model StreetStuff_Shop.ViewModels.BasketViewModel
+﻿@model StreetStuff_Shop.ViewModels.BasketViewModel
 @{
     Layout = null;
-
     User? user = UserService.GetUserFromSession();
     IEnumerable<Product> products = Model.products;
     IEnumerable<Cart> carts = Model.carts;
-    decimal? sum=0;
-
+    decimal? sum = 0;
 }
+
 <div class="container">
     @await Html.PartialAsync("_Layout_header")
 </div>
-<body>
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-12 justify-content">
-            
-                
-                        <div class="col-md-9">
-                            <h2>Cart</h2>
-                            <div class="row">
 
-                      @*foreach(Product wear in products)
-                        {
-                        if ( carts.FirstOrDefault(o=>(o.ProductId==wear.ProductId)&&(o.UserId==user.Id) ) !=null)*@
-                        @foreach(var cart in carts) 
-                        {
-                            if(cart.UserId==user.Id)
-                            {     
-                                Product wear = products.FirstOrDefault(p => p.ProductId == cart.ProductId);
+@if (user != null)
+{
+    <body>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-12 justify-content">
+                    <div class="col-md-9">
+                        <h2>Cart</h2>
+                        <div class="row">
+                            
+                            @foreach (var cart in carts)
+                            {
+                                if (cart.UserId == user.Id)
+                                {
+                                    Product? wear = products.FirstOrDefault(p => p.ProductId == cart.ProductId);
+                                    <div class="col-md-4 mb-4">
+                                        <img src="~/photos/wear/@wear.Photo" alt="Product" class="mb-3">
+                                        <h5>@wear.ProductName</h5>
+                                        <p>@wear.Price</p>
+                                        <div class="input-group mb-3">
+                                            <form method="post" action="Profile">
+                                                <input type="hidden" name="id" value="@wear.ProductId">
+                                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                            </form>
+                                            <input type="text" class="form-control" value="@cart.Quantity" aria-label="Quantity">
+                                            <form method="post" action="Profile">
+                                                <input type="hidden" name="id" value="@wear.ProductId">
+                                                <button class="btn btn-outline-secondary" type="button">+</button>
+                                            </form>
+                                        </div>
+                                        <form method="post" action="Profile">
+                                            <input type="hidden" name="id" value="@wear.ProductId">
+                                            <button class="btn btn-danger ">Remove from Cart</button>
+                                        </form>
+                                    </div>
+                                    sum =sum+ wear.Price * cart.Quantity;
 
-
-                                <img src="https://via.placeholder.com/250x300" alt="Product" class="mb-3">
-                                <h5>@wear.ProductName</h5>
-                                <p>@wear.Price</p>
-                                <div class="input-group mb-3">
-                                    <button class="btn btn-outline-secondary" type="button">-</button>
-                                    <input type="text" class="form-control" value="@cart.Quantity" aria-label="Quantity">
-                                    <button class="btn btn-outline-secondary" type="button">+</button>
-                                </div>
-                                <button class="btn btn-danger">Remove from Cart </button>
-
-                                sum+= wear.Price;
-                            } 
-                        }    
-                        <div class="col-md-4">
-                        </div>
-                                
-                            </div>
-                            <hr>
+                                }
+                            }
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Продолжить покупки</a>
+                                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Continue Shopping</a>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <p class="fw-bold">Sum: @sum</p>
-                                    <button class="btn btn-primary">Оформить заказ</button>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-bold">
+                                            Sum: @sum
+                                            <button class="btn btn-primary">Place Order</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-                    
+
+                        
+
+
+
+                     </div>
+                        
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-
-</body>
-
-
-
+    </body>
+}
+else
+{
+    <main class="container my-5">
+        <div>
+            <h1>You have to log in</h1>
+        </div>
+    </main>
+}

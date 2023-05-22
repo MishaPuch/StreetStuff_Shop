@@ -3,5 +3,6 @@
     public interface IDbContext
     {
         public StreetStuffContext AppDbContext();
+      
     }
 }

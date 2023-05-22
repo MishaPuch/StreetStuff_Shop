@@ -4,6 +4,9 @@ namespace StreetStuff_Shop.DI
 {
     public class DbContext : IDbContext
     {
+        
+
+        
 
         public StreetStuffContext AppDbContext()
         {
@@ -12,5 +15,6 @@ namespace StreetStuff_Shop.DI
             return db;
         }
 
+      
     }
 }

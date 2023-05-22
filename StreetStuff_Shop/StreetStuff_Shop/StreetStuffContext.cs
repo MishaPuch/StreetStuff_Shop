@@ -72,9 +72,8 @@ public partial class StreetStuffContext : DbContext
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Cart");
+            entity.HasKey(e => e.Id).HasName("[PK__Cart__3214EC073730AA0B]");
+            entity.ToTable("Cart");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -114,9 +113,8 @@ public partial class StreetStuffContext : DbContext
 
         modelBuilder.Entity<Liked>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Liked");
+            entity.HasKey(e => e.Id).HasName("PK__Liked__3214EC07955FC03E");
+            entity.ToTable("Liked");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -159,7 +157,7 @@ public partial class StreetStuffContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Description).HasColumnType("text");
-            entity.Property(e => e.ImageUrl)
+            entity.Property(e => e.Photo)
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("ImageURL");

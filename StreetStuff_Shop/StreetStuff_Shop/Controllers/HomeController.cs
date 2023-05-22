@@ -39,5 +39,34 @@ namespace StreetStuff_Shop.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        public ActionResult AddToBasket(int ProductId, int UserId,int Quantity) 
+        {
+            StreetStuffContext db=new StreetStuffContext();
+            Cart cart=new Cart();
+
+            cart.Id = db.Carts.Count() + 1;
+            cart.ProductId = ProductId;
+            cart.UserId = UserId;
+            cart.Quantity=Quantity;
+
+            db.Carts.Add(cart);
+            db.SaveChanges();
+
+            return Redirect("Index"); 
+        }
+        [HttpPost]
+        public ActionResult RemoveFromBasket(int id)
+        {
+            StreetStuffContext db = new StreetStuffContext();
+            
+            Cart ? cart=db.Carts.FirstOrDefault(cart=>cart.Id==id);
+
+            db.Carts.Remove(cart);
+            db.SaveChanges();
+
+            return Redirect("Index");
+
+        }
     }
 }

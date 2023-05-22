@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EJ195GemDmX2sHHHvA+SSEQrZ9eii3B8vnf6h68bCpA=",
+  "Hash": "iNYY6ZUEulyKDVUqhL7Pb6+IFpYCdnWnNF26NbcI/yk=",
   "Source": "StreetStuff_Shop",
   "BasePath": "_content/StreetStuff_Shop",
   "Mode": "Default",
@@ -1171,6 +1171,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\photos\\logo\\text.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\wear\\hoodie.jpg",
+      "SourceId": "StreetStuff_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\",
+      "BasePath": "_content/StreetStuff_Shop",
+      "RelativePath": "photos/wear/hoodie.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\wear\\hoodie.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\photos\\wear\\Shorts.jpg",
+      "SourceId": "StreetStuff_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\misha\\Desktop\\StreetStuff\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\wwwroot\\",
+      "BasePath": "_content/StreetStuff_Shop",
+      "RelativePath": "photos/wear/Shorts.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photos\\wear\\Shorts.jpg"
     }
   ]
 }
