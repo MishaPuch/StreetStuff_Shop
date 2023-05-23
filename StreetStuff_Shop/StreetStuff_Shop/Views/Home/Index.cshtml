@@ -1,12 +1,61 @@
 ﻿@using Newtonsoft.Json;
+@model StreetStuff_Shop.ViewModels.IndexViewModel
 @{
 
     ViewData["Title"] = "Home Page";
-
+    IEnumerable<Product> products = Model.products;
     User? user = null;
     user = UserService.GetUserFromSession();
 }
-@if (user != null)
-{
+        
+
     
-}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center justify-content bg-body-tertiary ">
+    @if (user != null)
+    {
+        @foreach (Product wear in products)
+        {
+            <div class="col-md-4 mb-4">
+                <img src="~/photos/wear/@wear.Photo" alt="Product" class="mb-3">
+                <h5>@wear.ProductName</h5>
+                <p>@wear.Brand</p>
+                <p>@wear.Color</p>
+
+                <p>@wear.Price $</p>
+
+                <form method="post" asp-controller="Home" asp-action="AddToBasket">
+                    <input type="hidden" name="UserId" value="@user.Id">
+                    <input type="hidden" name="ProductId" value="@wear.ProductId">
+
+                    <button class="btn btn-danger ">Add to Cart</button>
+                </form>
+                <form method="post" asp-controller="Account" asp-action="AddProductToLiked">
+                    <input type="hidden" name="UserId" value="@user.Id">
+                    <input type="hidden" name="ProductId" value="@wear.ProductId">
+
+                    <button class="btn btn-danger ">Add to Liked</button>
+                </form>
+            </div>
+        }
+
+    }
+    else
+    {
+        @foreach (Product wear in products)
+        {
+            <div class="col-md-4 mb-4">
+                <img src="~/photos/wear/@wear.Photo" alt="Product" class="mb-3">
+                <h5>@wear.ProductName</h5>
+                <p>@wear.Brand</p>
+                <p>@wear.Color</p>
+
+                <p>@wear.Price $</p>
+                
+                <form method="post" action="">
+                    
+                    <button class="btn btn-danger ">Add to Cart</button>
+                </form>
+            </div>
+        }
+    }

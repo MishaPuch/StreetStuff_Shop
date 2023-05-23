@@ -72,8 +72,11 @@
                                     <p>@wear.Description</p>
                                     <p>@wear.Brand</p>
                                     <p>@wear.Price</p>
-                                    <form method="post" action="">
-                                         <input type="hidden" name="id" value="@wear.ProductId">
+                                    <form method="post" asp-controller="Home" asp-action="AddToBasket">
+
+                                        <input type="hidden" name="ProductId" value="@wear.ProductId">
+                                        <input type="hidden" name="UserId" value="@user.Id">
+
                                          <button class="btn btn-outline-primary">Add to Card</button>
                                     </form>
                                     <br />

@@ -53,10 +53,7 @@ namespace StreetStuff_Shop.Controllers
             return View(profile);
         }
         [HttpPost]
-        public ActionResult AddProductToLiked(int id)
-        {
-            return Redirect("Profile");
-        }
+        
         [HttpPost]
         public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
         {
@@ -73,25 +70,50 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
-            
-                StreetStuffContext db = new StreetStuffContext();
-            Liked liked = new Liked();
-
-            do
+            if (db.AppDbContext().Liked.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
             {
-                liked.Id = db.Liked.Count() + 1;
+                using (StreetStuffContext db = new StreetStuffContext())
+                {
+                    Liked liked = new Liked();
+                    bool isIdUnique = false;
+
+                    do
+                    {
+                        liked.Id = GetUniqueLikedId(db);
+                        if (liked.Id > 0)
+                            isIdUnique = !db.Liked.Any(l => l.Id == liked.Id);
+                    }
+                    while (!isIdUnique);
+
+                    liked.ProductId = ProductId;
+                    liked.UserId = UserId;
+
+                    db.Liked.Add(liked);
+                    db.SaveChanges();
+                }
             }
-            while (db.Liked.FirstOrDefault(l => l.Id == liked.Id)!=null);
 
-            liked.ProductId = ProductId;
-            liked.UserId = UserId;
-            
-                db.Liked.Add(liked);
-                db.SaveChanges();
-
-            
-            return Redirect("Profile");
+            return RedirectToAction("Profile");
         }
+
+        private int GetUniqueLikedId(StreetStuffContext db)
+        {
+            Random random = new Random();
+            int maxAttempts = 100; 
+            int attemptCount = 0;
+
+            while (attemptCount < maxAttempts)
+            {
+                int newId = random.Next(1, int.MaxValue);
+                if (!db.Liked.Any(l => l.Id == newId))
+                    return newId;
+
+                attemptCount++;
+            }
+
+            return 0; 
+        }
+
 
 
         // GET: AccountController/Create
