@@ -10,10 +10,10 @@ namespace StreetStuff_Shop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private IDbContext db;
+        private StreetStuffContext db;
 
 
-        public HomeController(ILogger<HomeController> logger, IDbContext db)
+        public HomeController(ILogger<HomeController> logger, StreetStuffContext db)
         {
             this.db = db;
             _logger = logger;
@@ -22,7 +22,7 @@ namespace StreetStuff_Shop.Controllers
         public IActionResult Index()
         {
             IndexViewModel model = new IndexViewModel();
-            model.products = db.AppDbContext().Products.ToList();
+            model.products = db.Products.ToList();
             return View(model);
         }
 
@@ -34,15 +34,15 @@ namespace StreetStuff_Shop.Controllers
         public ActionResult Basket()
         {
             BasketViewModel model = new BasketViewModel();
-            model.products = db.AppDbContext().Products.ToList();
-            model.carts = db.AppDbContext().Carts.ToList();
+            model.products = db.Products.ToList();
+            model.carts = db.Carts.ToList();
 
             return View(model);
         }
         [HttpPost]
         public ActionResult AddToBasket(int UserId, int ProductId)
         {
-            if (db.AppDbContext().Carts.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
+            if (db.Carts.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
             {
                 using (StreetStuffContext db = new StreetStuffContext())
                 {

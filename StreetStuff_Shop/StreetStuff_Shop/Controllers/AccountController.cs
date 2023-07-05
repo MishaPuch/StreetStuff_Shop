@@ -10,10 +10,10 @@ namespace StreetStuff_Shop.Controllers
 {
     public class AccountController : Controller
     {
-        private IDbContext db;
+        private  readonly StreetStuffContext db;
         private IUserService userService;
         
-        public AccountController(IDbContext db ,IUserService userService) 
+        public AccountController(StreetStuffContext db, IUserService userService) 
         { 
             this.db = db;
             this.userService = userService;
@@ -47,8 +47,8 @@ namespace StreetStuff_Shop.Controllers
         public ActionResult Profile()
         {
             ProfileViewModel profile = new ProfileViewModel();
-            profile.products=db.AppDbContext().Products.ToList<Product>();
-            profile.liked=db.AppDbContext().Liked.ToList<Liked>();
+            profile.products=db.Products.ToList<Product>();
+            profile.liked=db.Liked.ToList<Liked>();
 
             return View(profile);
         }
@@ -57,7 +57,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
         {
-            Liked liked = db.AppDbContext().Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
+            Liked liked = db.Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
             if (liked != null)
             {
                 StreetStuffContext db = new StreetStuffContext();
@@ -70,7 +70,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
-            if (db.AppDbContext().Liked.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
+            if (db.Liked.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
             {
                 using (StreetStuffContext db = new StreetStuffContext())
                 {
@@ -130,7 +130,7 @@ namespace StreetStuff_Shop.Controllers
                 {
                     User user1 = new User()
                     {
-                        Id = db.AppDbContext().Users.Count() + 1,
+                        Id = db.Users.Count() + 1,
                         Email = user.Email,
                         Password = user.Password,
                         Photo = user.Photo,
