@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o/XIeHvlD4ofeKrkRxjF8ewn6/3XSans16G47+7k3h7moUgvG5q3vaQDKBbiF7eTB+CRknAsdXjCmvTV9yXV0w==",
+  "dgSpecHash": "D2iA051ZzH88UsEYWITqJg3jaA7I8+sSmAzhMFWfeHMyk2yThLIUIgMGXlNQFRaDpFrWrE0/6GujGt78bUKM1Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\misha\\Desktop\\DevProject\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.csproj",
+  "projectFilePath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\misha\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\misha\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

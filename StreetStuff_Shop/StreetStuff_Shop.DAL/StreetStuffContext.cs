@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using StreetStuff_Shop.Models;
 
 namespace StreetStuff_Shop;
@@ -8,15 +9,12 @@ namespace StreetStuff_Shop;
 public partial class StreetStuffContext : DbContext
 {
     string connectionString;
-    public StreetStuffContext(string connectionString)
-    {
-        this.connectionString = connectionString;
-    }
+ 
     public StreetStuffContext()
     {
     }
 
-    public StreetStuffContext(DbContextOptions<StreetStuffContext> options)
+    public StreetStuffContext(DbContextOptions<StreetStuffContext> options  )
         : base(options)
     {
     }

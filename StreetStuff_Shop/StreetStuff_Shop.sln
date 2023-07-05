@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetStuff_Shop", "StreetStuff_Shop\StreetStuff_Shop.csproj", "{B52B3F2D-01B0-48B5-9E44-520B0CCA7F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetStuff_Shop.DAL", "StreetStuff_Shop.DAL\StreetStuff_Shop.DAL.csproj", "{98FC4BD9-A987-4057-B476-76310844717F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetStuff_Shop.DAL", "StreetStuff_Shop.DAL\StreetStuff_Shop.DAL.csproj", "{98FC4BD9-A987-4057-B476-76310844717F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetStuff_Shop.BLL", "StreetStuff_Shop.BLL\StreetStuff_Shop.BLL.csproj", "{D080E733-2CBA-4371-A358-3D280559C94D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{98FC4BD9-A987-4057-B476-76310844717F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98FC4BD9-A987-4057-B476-76310844717F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98FC4BD9-A987-4057-B476-76310844717F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D080E733-2CBA-4371-A358-3D280559C94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D080E733-2CBA-4371-A358-3D280559C94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D080E733-2CBA-4371-A358-3D280559C94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D080E733-2CBA-4371-A358-3D280559C94D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3561,11 +3561,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\misha\\Desktop\\DevProject\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj",
+      "projectUniqueName": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj",
       "projectName": "StreetStuff_Shop.DAL",
-      "projectPath": "C:\\Users\\misha\\Desktop\\DevProject\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj",
+      "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj",
       "packagesPath": "C:\\Users\\misha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\misha\\Desktop\\DevProject\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\obj\\",
+      "outputPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
