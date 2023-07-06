@@ -1,19 +1,17 @@
 ﻿using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
 
 
 namespace StreetStuff_Shop.DI
 {
     public class UserService : IUserService
     {
+
         StreetStuffContext dbContext;
-        IHttpContextAccessor httpContextAccessor;
-        public UserService(StreetStuffContext db,IHttpContextAccessor httpContextAccessor) 
+        public UserService(StreetStuffContext db) 
         {
             this.dbContext = db;
-            this.httpContextAccessor = httpContextAccessor;
 
         }
 
@@ -31,12 +29,7 @@ namespace StreetStuff_Shop.DI
             var db = dbContext;
             User? user=db.Users.FirstOrDefault(u=>u.Email==email &&u.Password==password);
             return user;
-        }
-
-        
-
-       
-
+        }        
 
     }
 }

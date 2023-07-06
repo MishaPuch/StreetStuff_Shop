@@ -1,0 +1,15 @@
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.csproj.AssemblyReference.cache
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.AssemblyInfoInputs.cache
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.AssemblyInfo.cs
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.csproj.CoreCompileInputs.cache
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.BLL.deps.json
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.BLL.dll
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.BLL.pdb
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.DAL.dll
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.DAL.pdb
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.csproj.CopyComplete
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.dll
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\refint\StreetStuff_Shop.BLL.dll
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.pdb
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\ref\StreetStuff_Shop.BLL.dll

@@ -1203,6 +1203,19 @@
           }
         }
       },
+      "StreetStuff_Shop.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "StreetStuff_Shop.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/StreetStuff_Shop.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StreetStuff_Shop.BLL.dll": {}
+        }
+      },
       "StreetStuff_Shop.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3748,6 +3761,11 @@
         "version.txt"
       ]
     },
+    "StreetStuff_Shop.BLL/1.0.0": {
+      "type": "project",
+      "path": "../StreetStuff_Shop.BLL/StreetStuff_Shop.BLL.csproj",
+      "msbuildProject": "../StreetStuff_Shop.BLL/StreetStuff_Shop.BLL.csproj"
+    },
     "StreetStuff_Shop.DAL/1.0.0": {
       "type": "project",
       "path": "../StreetStuff_Shop.DAL/StreetStuff_Shop.DAL.csproj",
@@ -3763,6 +3781,7 @@
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "NUnit >= 3.13.3",
       "Newtonsoft.Json >= 13.0.3",
+      "StreetStuff_Shop.BLL >= 1.0.0",
       "StreetStuff_Shop.DAL >= 1.0.0"
     ]
   },
@@ -3799,6 +3818,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj": {
+              "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj"
+            },
             "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj": {
               "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj"
             }

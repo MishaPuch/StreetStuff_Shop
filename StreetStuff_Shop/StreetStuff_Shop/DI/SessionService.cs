@@ -29,5 +29,11 @@ namespace StreetStuff_Shop.DI
             var HttpContext = httpContextAccessor.HttpContext;
             HttpContext.Session.SetString("CurrentUser", JsonConvert.SerializeObject(user));
         }
+        public void LogoutUser()
+        {
+            var HttpContext = httpContextAccessor.HttpContext;
+            HttpContext.Session.Clear();
+
+        }
     }
 }

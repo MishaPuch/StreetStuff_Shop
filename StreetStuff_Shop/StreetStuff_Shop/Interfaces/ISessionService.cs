@@ -6,6 +6,7 @@ namespace StreetStuff_Shop.Interfaces
     {
         public void RegistrUserInSession(User user);
         public User GetUserFromSession();
+        public void LogoutUser();
 
     }
 }

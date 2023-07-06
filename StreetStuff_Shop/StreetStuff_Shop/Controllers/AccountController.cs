@@ -158,7 +158,7 @@ namespace StreetStuff_Shop.Controllers
         public ActionResult Logout()
         {
 
-            userService.LogoutUser();
+            sessionService.LogoutUser();
             return RedirectToAction("Index", "Home");
         }
 
