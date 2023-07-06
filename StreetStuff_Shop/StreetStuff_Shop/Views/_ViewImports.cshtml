@@ -1,8 +1,9 @@
-﻿@using StreetStuff_Shop
+﻿    @using StreetStuff_Shop
 @using StreetStuff_Shop.Models
 @using Newtonsoft.Json
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject StreetStuff_Shop.Interfaces.IUserService WebUserService
 @inject StreetStuff_Shop.Interfaces.IUserService UserService

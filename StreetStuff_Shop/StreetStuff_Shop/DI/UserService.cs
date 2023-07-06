@@ -1,6 +1,8 @@
 ﻿using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+
 
 namespace StreetStuff_Shop.DI
 {
@@ -31,6 +33,14 @@ namespace StreetStuff_Shop.DI
             return user;
         }
 
+        
+
+        public void LogoutUser()
+        {
+            var HttpContext = httpContextAccessor.HttpContext;
+            HttpContext.Session.Clear();
+
+        }
         public User GetUserFromSession()
         {
             var session = httpContextAccessor.HttpContext.Session;
@@ -42,18 +52,12 @@ namespace StreetStuff_Shop.DI
             }
             return null;
         }
-
-        public void LogoutUser()
-        {
-            var HttpContext = httpContextAccessor.HttpContext;
-            HttpContext.Session.Clear();
-
-        }
-
         public void RegistrUserInSession(User user)
         {
             var HttpContext = httpContextAccessor.HttpContext;
             HttpContext.Session.SetString("CurrentUser", JsonConvert.SerializeObject(user));
         }
+
+
     }
 }

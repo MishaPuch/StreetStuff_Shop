@@ -5,7 +5,7 @@
 @{
 
     Layout = null;
-    User? user = UserService.GetUserFromSession();
+    User? user = WebUserService.GetUserFromSession();
     IEnumerable<Product>? products = Model.products;
     IEnumerable<Liked>? liked = Model.liked;
 }

@@ -1,11 +1,12 @@
 ﻿@using Newtonsoft.Json;
+@using StreetStuff_Shop.Interfaces;
 @model StreetStuff_Shop.ViewModels.IndexViewModel
 @{
 
     ViewData["Title"] = "Home Page";
     IEnumerable<Product> products = Model.products;
     User? user = null;
-    user = UserService.GetUserFromSession();
+    user = WebUserService.GetUserFromSession();
 }
         
 

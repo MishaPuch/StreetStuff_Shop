@@ -44,26 +44,25 @@ namespace StreetStuff_Shop.Controllers
         {
             if (db.Carts.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
             {
-                using (StreetStuffContext db = new StreetStuffContext())
+
+                Cart cart = new Cart();
+                bool isIdUnique = false;
+
+                do
                 {
-                    Cart cart = new Cart();
-                    bool isIdUnique = false;
-
-                    do
-                    {
-                        cart.Id = GenerateUniqueCartId();
-                        if (cart.Id > 0)
-                            isIdUnique = !db.Carts.Any(c => c.Id == cart.Id);
-                    }
-                    while (!isIdUnique);
-
-                    cart.ProductId = ProductId;
-                    cart.UserId = UserId;
-                    cart.Quantity = 1;
-
-                    db.Carts.Add(cart);
-                    db.SaveChanges();
+                    cart.Id = GenerateUniqueCartId();
+                    if (cart.Id > 0)
+                        isIdUnique = !db.Carts.Any(c => c.Id == cart.Id);
                 }
+                while (!isIdUnique);
+
+                cart.ProductId = ProductId;
+                cart.UserId = UserId;
+                cart.Quantity = 1;
+
+                db.Carts.Add(cart);
+                db.SaveChanges();
+
             }
             
                 return RedirectToAction("Basket");
@@ -72,28 +71,25 @@ namespace StreetStuff_Shop.Controllers
 
         private int GenerateUniqueCartId()
         {
-            using (StreetStuffContext db = new StreetStuffContext())
+            int maxAttempts = 100;
+            int attemptCount = 0;
+
+            while (attemptCount < maxAttempts)
             {
-                int maxAttempts = 100; 
-                int attemptCount = 0;
+                int newId = new Random().Next(1, int.MaxValue);
+                if (!db.Carts.Any(c => c.Id == newId))
+                    return newId;
 
-                while (attemptCount < maxAttempts)
-                {
-                    int newId = new Random().Next(1, int.MaxValue);
-                    if (!db.Carts.Any(c => c.Id == newId))
-                        return newId;
-
-                    attemptCount++;
-                }
+                attemptCount++;
             }
 
-            return 0; 
+
+            return 0;
         }
 
         [HttpPost]
         public ActionResult RemoveFromBasket(int id)
         {
-            StreetStuffContext db = new StreetStuffContext();
 
             Cart? cart = db.Carts.FirstOrDefault(cart => cart.Id == id);
 

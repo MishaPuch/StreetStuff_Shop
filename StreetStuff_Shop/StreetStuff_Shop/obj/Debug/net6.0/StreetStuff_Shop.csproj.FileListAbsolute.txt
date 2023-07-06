@@ -277,9 +277,6 @@ C:\Users\misha\Desktop\e4d8a29a7bf10675fc71be65944c7a3b71ae84f5\StreetStuff_Shop
 C:\Users\misha\Desktop\e4d8a29a7bf10675fc71be65944c7a3b71ae84f5\StreetStuff_Shop\StreetStuff_Shop\obj\Debug\net6.0\ref\StreetStuff_Shop.dll
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\appsettings.json
-C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.DAL.deps.json
-C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.DAL.runtimeconfig.json
-C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.DAL.exe
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.staticwebassets.runtime.json
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.exe
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.deps.json

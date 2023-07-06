@@ -1,7 +1,7 @@
 ﻿@model StreetStuff_Shop.ViewModels.BasketViewModel
 @{
     Layout = null;
-    User? user = UserService.GetUserFromSession();
+    User? user = WebUserService.GetUserFromSession();
     IEnumerable<Product> products = Model.products;
     IEnumerable<Cart> carts = Model.carts;
     decimal? sum = 0;

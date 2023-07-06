@@ -20,6 +20,7 @@ string connectionString = configuration.GetSection("Data").Value;
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IDbContext , StreetStuff_Shop.DI.DbContext>(ConnectionString);
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ISessionService, SessionService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddDbContext<StreetStuffContext>(options => options.UseSqlServer(connectionString));

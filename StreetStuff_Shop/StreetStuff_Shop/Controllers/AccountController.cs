@@ -12,11 +12,13 @@ namespace StreetStuff_Shop.Controllers
     {
         private  readonly StreetStuffContext db;
         private IUserService userService;
-        
-        public AccountController(StreetStuffContext db, IUserService userService) 
+        private ISessionService sessionService;
+
+        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService) 
         { 
             this.db = db;
             this.userService = userService;
+            this.sessionService = sessionService;
         }
 
         public ActionResult Login()
@@ -29,7 +31,7 @@ namespace StreetStuff_Shop.Controllers
             User? user = userService.FoundUser(login.email, login.password);
             if (user != null)
             {
-                userService.RegistrUserInSession(user);
+                sessionService.RegistrUserInSession(user);
                 return RedirectToAction("index", "home");
             }
             else
@@ -60,7 +62,6 @@ namespace StreetStuff_Shop.Controllers
             Liked liked = db.Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
             if (liked != null)
             {
-                StreetStuffContext db = new StreetStuffContext();
                      db.Liked.Remove(liked);
                      db.SaveChanges();
                 
@@ -72,25 +73,24 @@ namespace StreetStuff_Shop.Controllers
         {
             if (db.Liked.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
             {
-                using (StreetStuffContext db = new StreetStuffContext())
+
+                Liked liked = new Liked();
+                bool isIdUnique = false;
+
+                do
                 {
-                    Liked liked = new Liked();
-                    bool isIdUnique = false;
-
-                    do
-                    {
-                        liked.Id = GetUniqueLikedId(db);
-                        if (liked.Id > 0)
-                            isIdUnique = !db.Liked.Any(l => l.Id == liked.Id);
-                    }
-                    while (!isIdUnique);
-
-                    liked.ProductId = ProductId;
-                    liked.UserId = UserId;
-
-                    db.Liked.Add(liked);
-                    db.SaveChanges();
+                    liked.Id = GetUniqueLikedId(db);
+                    if (liked.Id > 0)
+                        isIdUnique = !db.Liked.Any(l => l.Id == liked.Id);
                 }
+                while (!isIdUnique);
+
+                liked.ProductId = ProductId;
+                liked.UserId = UserId;
+
+                db.Liked.Add(liked);
+                db.SaveChanges();
+
             }
 
             return RedirectToAction("Profile");
@@ -141,7 +141,7 @@ namespace StreetStuff_Shop.Controllers
                     };
                     
                     userService.CreateUser(user1);
-                    userService.RegistrUserInSession(user1);
+                    sessionService.RegistrUserInSession(user1);
                     return RedirectToAction("Index", "Home");
                 }
                 else
