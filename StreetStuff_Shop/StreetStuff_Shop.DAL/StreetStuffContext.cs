@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StreetStuff_Shop.DAL.Models;
 using StreetStuff_Shop.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace StreetStuff_Shop;
 
@@ -32,17 +34,21 @@ public partial class StreetStuffContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Person> Person { get; set; }
+
     public virtual DbSet<Sex> Sexes { get; set; }
 
     public virtual DbSet<Size> Sizes { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        var a = 2;
-        optionsBuilder.UseSqlServer();
+        options.UseSqlServer(b => b.MigrationsAssembly("StreetStuff_Shop"));
+        options.EnableServiceProviderCaching(false); // Добавьте эту строку для отключения кэширования провайдера
+
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

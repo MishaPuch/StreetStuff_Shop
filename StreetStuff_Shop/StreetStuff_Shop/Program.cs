@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Client;
 using NUnit.Framework;
 using StreetStuff_Shop;
+using StreetStuff_Shop.BLL.DI;
+using StreetStuff_Shop.BLL.Interfaces;
 using StreetStuff_Shop.DAL;
 using StreetStuff_Shop.DI;
 using StreetStuff_Shop.Interfaces;
@@ -20,10 +22,13 @@ string connectionString = configuration.GetSection("Data").Value;
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IDbContext , StreetStuff_Shop.DI.DbContext>(ConnectionString);
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ISessionService, SessionService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddDbContext<StreetStuffContext>(options => options.UseSqlServer(connectionString));
+
+
 
 
 
@@ -32,6 +37,15 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
 });
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider
+        .GetRequiredService<StreetStuffContext>();
+
+    dbContext.Database.Migrate();
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

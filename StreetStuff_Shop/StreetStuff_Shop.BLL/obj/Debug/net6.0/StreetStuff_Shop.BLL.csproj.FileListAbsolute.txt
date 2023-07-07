@@ -13,3 +13,5 @@ C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\ob
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\refint\StreetStuff_Shop.BLL.dll
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.pdb
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\ref\StreetStuff_Shop.BLL.dll
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\bin\Debug\net6.0\StreetStuff_Shop.BLL.runtimeconfig.json
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop.BLL\obj\Debug\net6.0\StreetStuff_Shop.BLL.genruntimeconfig.cache

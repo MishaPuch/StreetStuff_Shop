@@ -1207,6 +1207,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
+          "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "StreetStuff_Shop.DAL": "1.0.0"
         },
         "compile": {

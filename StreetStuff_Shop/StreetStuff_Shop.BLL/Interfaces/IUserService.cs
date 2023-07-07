@@ -5,8 +5,12 @@ namespace StreetStuff_Shop.Interfaces
     public interface IUserService
     {
         public void CreateUser(User user);
-        public User FoundUser(string email , string password);
-       
+        public User GetUser(string email , string password);
+        public User GetUserById(int id);
+        public bool ChangeUser(User user);
+
+
+
 
     }
 }

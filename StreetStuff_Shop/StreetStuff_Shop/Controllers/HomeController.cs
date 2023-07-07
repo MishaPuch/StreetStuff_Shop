@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StreetStuff_Shop.BLL.Interfaces;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
@@ -11,12 +12,14 @@ namespace StreetStuff_Shop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private StreetStuffContext db;
+        private IProductService productService;
 
 
-        public HomeController(ILogger<HomeController> logger, StreetStuffContext db)
+        public HomeController(ILogger<HomeController> logger, StreetStuffContext db, IProductService productService)
         {
             this.db = db;
             _logger = logger;
+            this.productService = productService;
         }
 
         public IActionResult Index()
@@ -42,100 +45,59 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddToBasket(int UserId, int ProductId)
         {
-            if (db.Carts.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
+
+            if (productService.GetCartById(ProductId) == null)
             {
-
-                Cart cart = new Cart();
-                bool isIdUnique = false;
-
-                do
-                {
-                    cart.Id = GenerateUniqueCartId();
-                    if (cart.Id > 0)
-                        isIdUnique = !db.Carts.Any(c => c.Id == cart.Id);
-                }
-                while (!isIdUnique);
-
-                cart.ProductId = ProductId;
-                cart.UserId = UserId;
-                cart.Quantity = 1;
-
-                db.Carts.Add(cart);
-                db.SaveChanges();
-
-            }
-            
-                return RedirectToAction("Basket");
-            
-        }
-
-        private int GenerateUniqueCartId()
-        {
-            int maxAttempts = 100;
-            int attemptCount = 0;
-
-            while (attemptCount < maxAttempts)
-            {
-                int newId = new Random().Next(1, int.MaxValue);
-                if (!db.Carts.Any(c => c.Id == newId))
-                    return newId;
-
-                attemptCount++;
+                productService.AddToBasket(UserId, ProductId);
             }
 
+            return RedirectToAction("Basket");
 
-            return 0;
         }
+
+       
 
         [HttpPost]
         public ActionResult RemoveFromBasket(int id)
         {
-
-            Cart? cart = db.Carts.FirstOrDefault(cart => cart.Id == id);
-
-            db.Carts.Remove(cart);
-            db.SaveChanges();
+            Cart ? cart =productService.GetCartById(id);
+            productService.RemoveFromBasket(cart);
 
             return Redirect("Basket");
-
         }
         [HttpPost]
         public ActionResult AddQuantity(int id)
         {
-            using (StreetStuffContext db = new StreetStuffContext())
-            {
-                Cart ? cart= db.Carts.FirstOrDefault(c => c.Id == id);
-                cart.Quantity++;
-                db.SaveChanges();
-            }
 
-                return Redirect("Basket");
+            Cart? cart = productService.GetCartById(id);
+            cart.Quantity++;
+            db.SaveChanges();
+
+
+            return Redirect("Basket");
 
         }
         [HttpPost]
         public ActionResult MinusQuantity(int id)
         {
-            using (StreetStuffContext db = new StreetStuffContext())
-            {
-                Cart? cart = db.Carts.FirstOrDefault(c => c.Id == id);
-                cart.Quantity--;
-                db.SaveChanges();
-            }
+
+            Cart? cart = productService.GetCartById(id);
+            cart.Quantity--;
+            db.SaveChanges();
+
 
             return Redirect("Basket");
 
         }
         [HttpPost]
-        public ActionResult ChangeQuantity(int id ,int quantity)
+        public ActionResult ChangeQuantity(int id, int quantity)
         {
-            using (StreetStuffContext db = new StreetStuffContext())
-            {
-                Cart? cart = db.Carts.FirstOrDefault(c => c.Id == id);
-                cart.Quantity=quantity;
-                db.SaveChanges();
-            }
-            return Redirect("Basket");
 
+            Cart? cart = productService.GetCartById(id);
+            cart.Quantity = quantity;
+            db.SaveChanges();
+
+            return Redirect("Basket");
         }
     }
 }

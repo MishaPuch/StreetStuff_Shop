@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using StreetStuff_Shop.BLL.Interfaces;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
@@ -13,12 +14,14 @@ namespace StreetStuff_Shop.Controllers
         private  readonly StreetStuffContext db;
         private IUserService userService;
         private ISessionService sessionService;
+        private IProductService productService;
 
-        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService) 
+        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService , IProductService productService) 
         { 
             this.db = db;
             this.userService = userService;
             this.sessionService = sessionService;
+            this.productService = productService;   
         }
 
         public ActionResult Login()
@@ -28,7 +31,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            User? user = userService.FoundUser(login.email, login.password);
+            User? user = userService.GetUser(login.email, login.password);
             if (user != null)
             {
                 sessionService.RegistrUserInSession(user);
@@ -49,71 +52,34 @@ namespace StreetStuff_Shop.Controllers
         public ActionResult Profile()
         {
             ProfileViewModel profile = new ProfileViewModel();
-            profile.products=db.Products.ToList<Product>();
-            profile.liked=db.Liked.ToList<Liked>();
+            profile.products=productService.GetAllProducts();
+            profile.liked=productService.GetAllLikedProducts();
 
             return View(profile);
         }
-        [HttpPost]
         
         [HttpPost]
         public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
         {
-            Liked liked = db.Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
+            Liked liked = productService.GetLikedById(ProductId, UserId);
             if (liked != null)
             {
-                     db.Liked.Remove(liked);
-                     db.SaveChanges();
-                
+                productService.RemoveProductFromLiked(liked);
             }
             return Redirect("Profile");
         }
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
-            if (db.Liked.FirstOrDefault(x => (x.UserId == UserId) && (x.ProductId == ProductId)) == null)
+            Liked liked = productService.GetLikedById(ProductId, UserId);
+
+            if (liked == null)
             {
-
-                Liked liked = new Liked();
-                bool isIdUnique = false;
-
-                do
-                {
-                    liked.Id = GetUniqueLikedId(db);
-                    if (liked.Id > 0)
-                        isIdUnique = !db.Liked.Any(l => l.Id == liked.Id);
-                }
-                while (!isIdUnique);
-
-                liked.ProductId = ProductId;
-                liked.UserId = UserId;
-
-                db.Liked.Add(liked);
-                db.SaveChanges();
-
+                productService.AddProductToLiked(ProductId, UserId);              
             }
 
             return RedirectToAction("Profile");
-        }
-
-        private int GetUniqueLikedId(StreetStuffContext db)
-        {
-            Random random = new Random();
-            int maxAttempts = 100; 
-            int attemptCount = 0;
-
-            while (attemptCount < maxAttempts)
-            {
-                int newId = random.Next(1, int.MaxValue);
-                if (!db.Liked.Any(l => l.Id == newId))
-                    return newId;
-
-                attemptCount++;
-            }
-
-            return 0; 
-        }
-
+        }             
 
 
         // GET: AccountController/Create
