@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StreetStuff_Shop.BLL.Interfaces;
+using StreetStuff_Shop.DAL;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
@@ -15,13 +16,15 @@ namespace StreetStuff_Shop.Controllers
         private IUserService userService;
         private ISessionService sessionService;
         private IProductService productService;
+        private IRepository repository;
 
-        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService , IProductService productService) 
+        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService , IProductService productService, IRepository repository) 
         { 
             this.db = db;
             this.userService = userService;
             this.sessionService = sessionService;
             this.productService = productService;   
+            this.repository = repository;
         }
 
         public ActionResult Login()
@@ -31,7 +34,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            User? user = userService.GetUser(login.email, login.password);
+            User? user = repository.GetUser(login.email, login.password);
             if (user != null)
             {
                 sessionService.RegistrUserInSession(user);
@@ -52,8 +55,8 @@ namespace StreetStuff_Shop.Controllers
         public ActionResult Profile()
         {
             ProfileViewModel profile = new ProfileViewModel();
-            profile.products=productService.GetAllProducts();
-            profile.liked=productService.GetAllLikedProducts();
+            profile.products=repository.GetProducts();
+            profile.liked=repository.GetAllLikedProducts();
 
             return View(profile);
         }
@@ -61,7 +64,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
         {
-            Liked liked = productService.GetLikedById(ProductId, UserId);
+            Liked liked = repository.GetLikedById(ProductId, UserId);
             if (liked != null)
             {
                 productService.RemoveProductFromLiked(liked);
@@ -71,7 +74,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
-            Liked liked = productService.GetLikedById(ProductId, UserId);
+            Liked liked = repository.GetLikedById(ProductId, UserId);
 
             if (liked == null)
             {

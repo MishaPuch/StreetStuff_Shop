@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore.Metadata;
 using StreetStuff_Shop.BLL.Interfaces;
+using StreetStuff_Shop.DAL;
 using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,10 @@ namespace StreetStuff_Shop.BLL.DI
 {
     public class ProductService : IProductService
     {
-        StreetStuffContext db;
-        public ProductService(StreetStuffContext db)
+        private IRepository repository;
+        public ProductService(IRepository repository)
         {
-            this.db = db;
+            this.repository = repository;
         }
         public void AddProductToLiked(int ProductId, int UserId)
         {
@@ -24,41 +25,56 @@ namespace StreetStuff_Shop.BLL.DI
 
             do
             {
-                liked.Id = GetUniqueLikedId(db);
+                liked.Id = GetUniqueLikedId();
                 if (liked.Id > 0)
-                    isIdUnique = !db.Liked.Any(l => l.Id == liked.Id);
+                    isIdUnique = repository.GetLikedById(liked.Id, UserId) == null;
             }
             while (!isIdUnique);
 
             liked.ProductId = ProductId;
             liked.UserId = UserId;
 
-            db.Liked.Add(liked);
-            db.SaveChanges();
+            repository.AddLiked(liked);
+
+            
         }
 
-       
+        public void AddQuantity(int id)
+        {
+            Cart? cart = repository.GetCartById(id);
+            cart.Quantity++;
+            repository.SaveChanges();
+
+
+        }
 
         public void AddToBasket(int UserId, int ProductId)
         {
-            Cart cart = new Cart();
-            bool isIdUnique = false;
+            
+                Cart cart = new Cart();
+                bool isIdUnique = false;
 
-            do
-            {
-                cart.Id = GenerateUniqueCartId();
-                if (cart.Id > 0)
-                    isIdUnique = !db.Carts.Any(c => c.Id == cart.Id);
-            }
-            while (!isIdUnique);
+                do
+                {
+                    cart.Id = GenerateUniqueCartId();
+                    if (cart.Id > 0)
+                        isIdUnique = repository.GetCartById(cart.Id) == null;
+                }
+                while (!isIdUnique);
 
-            cart.ProductId = ProductId;
-            cart.UserId = UserId;
-            cart.Quantity = 1;
+                cart.ProductId = ProductId;
+                cart.UserId = UserId;
+                cart.Quantity = 1;
 
-            db.Carts.Add(cart);
-            db.SaveChanges();
-        }        
+                repository.AddCart(cart);
+            
+        }
+
+        public void ChangeQuantity(int id, int quantity)
+        {
+            Cart? cart = repository.GetCartById(id);
+            cart.Quantity = quantity;
+        }
 
         public int GenerateUniqueCartId()
         {
@@ -68,27 +84,19 @@ namespace StreetStuff_Shop.BLL.DI
             while (attemptCount < maxAttempts)
             {
                 int newId = new Random().Next(1, int.MaxValue);
-                if (!db.Carts.Any(c => c.Id == newId))
+                if (repository.GetCartById(newId) == null)
                     return newId;
 
                 attemptCount++;
             }
 
-
             return 0;
         }
 
-        public IEnumerable<Product>? GetAllProducts()
-        {
-            return db.Products.ToList<Product>();
-        }
 
-        public IEnumerable<Liked>? GetAllLikedProducts()
-        {
-            return db.Liked.ToList<Liked>();
-        }
 
-        public int GetUniqueLikedId(StreetStuffContext db)
+
+        public int GetUniqueLikedId()
         {
             Random random = new Random();
             int maxAttempts = 100;
@@ -97,35 +105,37 @@ namespace StreetStuff_Shop.BLL.DI
             while (attemptCount < maxAttempts)
             {
                 int newId = random.Next(1, int.MaxValue);
-                if (!db.Liked.Any(l => l.Id == newId))
+                if (!repository.GetCarts().Any(c => c.Id == newId))
                     return newId;
 
                 attemptCount++;
             }
 
             return 0;
-        }      
+        }
+
+        public int GetUniqueLikedId(StreetStuffContext db)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MinusQuantity(int id)
+        {
+            Cart? cart = repository.GetCartById(id);
+            cart.Quantity--;
+            repository.SaveChanges();
+        }
 
         public void RemoveFromBasket(Cart cart)
         {
-            db.Carts.Remove(cart);
-            db.SaveChanges();
+            repository.RemoveFromBasket(cart);
         }
 
         public void RemoveProductFromLiked(Liked liked)
         {
-            db.Liked.Remove(liked);
-            db.SaveChanges();
+            repository.RemoveProductFromLiked(liked);
         }
 
-        public Liked GetLikedById(int ProductId ,int UserId)
-        {
-            return db.Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
-        }
-                
-        public Cart GetCartById(int id)
-        {
-            return db.Carts.FirstOrDefault(cart => cart.Id == id);
-        }
+        
     }
 }

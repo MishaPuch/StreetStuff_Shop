@@ -21,6 +21,7 @@ string connectionString = configuration.GetSection("Data").Value;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IDbContext , StreetStuff_Shop.DI.DbContext>(ConnectionString);
+builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ISessionService, SessionService>();
