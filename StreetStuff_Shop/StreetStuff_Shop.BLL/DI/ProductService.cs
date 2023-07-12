@@ -95,7 +95,6 @@ namespace StreetStuff_Shop.BLL.DI
 
 
 
-
         public int GetUniqueLikedId()
         {
             Random random = new Random();
@@ -105,18 +104,15 @@ namespace StreetStuff_Shop.BLL.DI
             while (attemptCount < maxAttempts)
             {
                 int newId = random.Next(1, int.MaxValue);
-                if (!repository.GetCarts().Any(c => c.Id == newId))
+                Cart cart = repository.GetCart(newId);
+
+                if (cart == null)
                     return newId;
 
                 attemptCount++;
             }
 
             return 0;
-        }
-
-        public int GetUniqueLikedId(StreetStuffContext db)
-        {
-            throw new NotImplementedException();
         }
 
         public void MinusQuantity(int id)

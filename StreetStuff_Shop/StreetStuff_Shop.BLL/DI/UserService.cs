@@ -8,12 +8,10 @@ namespace StreetStuff_Shop.DI
     public class UserService : IUserService
     {
 
-        StreetStuffContext db;
         IRepository repository;
 
-        public UserService(StreetStuffContext db , IRepository repository) 
+        public UserService(IRepository repository) 
         {
-            this.db = db;
             this.repository = repository;
 
         }

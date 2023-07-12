@@ -12,15 +12,13 @@ namespace StreetStuff_Shop.Controllers
 {
     public class AccountController : Controller
     {
-        private  readonly StreetStuffContext db;
         private IUserService userService;
         private ISessionService sessionService;
         private IProductService productService;
         private IRepository repository;
 
-        public AccountController(StreetStuffContext db, IUserService userService, ISessionService sessionService , IProductService productService, IRepository repository) 
+        public AccountController(IUserService userService, ISessionService sessionService , IProductService productService, IRepository repository) 
         { 
-            this.db = db;
             this.userService = userService;
             this.sessionService = sessionService;
             this.productService = productService;   
@@ -52,11 +50,11 @@ namespace StreetStuff_Shop.Controllers
         }
 
         // GET: AccountController/Details/5
-        public ActionResult Profile()
+        public async Task<ActionResult> Profile()
         {
             ProfileViewModel profile = new ProfileViewModel();
-            profile.products=repository.GetProducts();
-            profile.liked=repository.GetAllLikedProducts();
+            profile.products=await repository.GetProducts();
+            profile.liked=await repository.GetAllLikedProducts();
 
             return View(profile);
         }
@@ -71,6 +69,7 @@ namespace StreetStuff_Shop.Controllers
             }
             return Redirect("Profile");
         }
+        //.....................................................................
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
@@ -83,7 +82,7 @@ namespace StreetStuff_Shop.Controllers
 
             return RedirectToAction("Profile");
         }             
-
+        //......................................................................
 
         // GET: AccountController/Create
         public ActionResult CreateAccount()
@@ -99,7 +98,7 @@ namespace StreetStuff_Shop.Controllers
                 {
                     User user1 = new User()
                     {
-                        Id = db.Users.Count() + 1,
+                        Id = repository.GetUserCount() + 1,
                         Email = user.Email,
                         Password = user.Password,
                         Photo = user.Photo,

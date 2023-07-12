@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace StreetStuff_Shop.DAL
         public Repository(StreetStuffContext db)
         {
             this.db = db;
-
         }
         public Liked GetLikedById(int ProductId, int UserId)
         {
@@ -23,32 +23,29 @@ namespace StreetStuff_Shop.DAL
 
         public Cart? GetCartById(int ProductId, int UserId)
         {
-
-            return db.Carts.FirstOrDefault(p => p.Id == ProductId && p.UserId == UserId);
-
+            return db.Carts.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
         }
 
-        public IEnumerable<Liked>? GetAllLikedProducts()
+        public async Task<IEnumerable<Liked>>? GetAllLikedProducts()
         {
-            return db.Liked.ToList<Liked>();
+            return await Task.Run(()=> db.Liked.ToList());
         }
         public User GetUser(string email, string password)
         {
             return db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-
         }
         public User GetUserById(int id)
         {
             return db.Users.FirstOrDefault(u => u.Id == id);
         }
-        public List<Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            return db.Products.ToList();
+            return await Task.Run(()=> db.Products.ToList());
         }
 
-        public List<Cart> GetCarts()
+        public async Task<List<Cart>> GetCarts()
         {
-            return db.Carts.ToList();
+            return await Task.Run(() => db.Carts.ToList());
         }
 
         public Cart GetCartById(int id)
@@ -102,8 +99,15 @@ namespace StreetStuff_Shop.DAL
         {
             db.SaveChanges();
         }
+        public Cart GetCart(int newId)
+        {
+            return db.Carts.FirstOrDefault(c => c.Id == newId);
+        }
+        public int GetUserCount()
+        {
+            return db.Users.Count();
+        }
 
-        
     }
 }
 

@@ -14,7 +14,6 @@ namespace StreetStuff_Shop.BLL.Interfaces
         public void AddToBasket(int UserId, int ProductId);
         public int GenerateUniqueCartId();
         public void RemoveFromBasket(Cart cart);
-        public int GetUniqueLikedId(StreetStuffContext db);
         public void AddQuantity(int id);
         public void MinusQuantity(int id);
         public void ChangeQuantity(int id, int quantity);

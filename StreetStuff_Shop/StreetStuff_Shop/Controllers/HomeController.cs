@@ -23,10 +23,10 @@ namespace StreetStuff_Shop.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             IndexViewModel model = new IndexViewModel();
-            model.products = repository.GetProducts();
+            model.products =await repository.GetProducts();
             return View(model);
         }
 
@@ -35,19 +35,20 @@ namespace StreetStuff_Shop.Controllers
         {
             return View();
         }
-        public ActionResult Basket()
+        public async Task<ActionResult> Basket()
         {
             BasketViewModel model = new BasketViewModel();
-            model.products = repository.GetProducts();
-            model.carts = repository.GetCarts();
+            model.products =await repository.GetProducts();
+            model.carts = await repository.GetCarts();
 
             return View(model);
         }
+        //........................................................................
         [HttpPost]
         public ActionResult AddToBasket(int UserId, int ProductId)
         {
-
-            if (repository.GetCartById(UserId, ProductId) == null)
+            Cart cart =repository.GetCartById(ProductId,UserId);
+            if ( cart == null)
             {
                 productService.AddToBasket(UserId, ProductId);
             }
@@ -55,7 +56,7 @@ namespace StreetStuff_Shop.Controllers
             return RedirectToAction("Basket");
 
         }
-
+        //........................................................................
        
 
         [HttpPost]
