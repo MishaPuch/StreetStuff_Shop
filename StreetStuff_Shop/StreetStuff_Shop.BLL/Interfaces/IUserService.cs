@@ -7,9 +7,9 @@ namespace StreetStuff_Shop.Interfaces
         public void CreateUser(User user);
         
         public void ChangeUser(User user);
-
-
-
+        public User GetUser(string email, string password);
+        public User GetUserById(int id);        
+        public int GetUserCount();
 
     }
 }

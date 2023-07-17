@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore.Metadata;
 using StreetStuff_Shop.BLL.Interfaces;
-using StreetStuff_Shop.DAL;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
 using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
@@ -13,37 +13,25 @@ namespace StreetStuff_Shop.BLL.DI
 {
     public class ProductService : IProductService
     {
-        private IRepository repository;
-        public ProductService(IRepository repository)
+        private IRepositoryLiked likedRepository;
+        private IRepositoryCarts cartRepository;
+        private IRepositoryProducts productRepository;
+        private IRepositoryUsers userRepository;
+
+        public ProductService(IRepositoryLiked likedRepository , IRepositoryCarts cartRepository, IRepositoryProducts productRepository, IRepositoryUsers userRepository)
         {
-            this.repository = repository;
+            this.likedRepository = likedRepository;
+            this.cartRepository = cartRepository;
+            this.productRepository = productRepository;
+            this.userRepository = userRepository;
         }
-        public void AddProductToLiked(int ProductId, int UserId)
-        {
-            Liked liked = new Liked();
-            bool isIdUnique = false;
-
-            do
-            {
-                liked.Id = GetUniqueLikedId();
-                if (liked.Id > 0)
-                    isIdUnique = repository.GetLikedById(liked.Id, UserId) == null;
-            }
-            while (!isIdUnique);
-
-            liked.ProductId = ProductId;
-            liked.UserId = UserId;
-
-            repository.AddLiked(liked);
-
-            
-        }
+       
 
         public void AddQuantity(int id)
         {
-            Cart? cart = repository.GetCartById(id);
+            Cart? cart = cartRepository.GetCartById(id);
             cart.Quantity++;
-            repository.SaveChanges();
+            likedRepository.SaveChanges();
 
 
         }
@@ -58,7 +46,7 @@ namespace StreetStuff_Shop.BLL.DI
                 {
                     cart.Id = GenerateUniqueCartId();
                     if (cart.Id > 0)
-                        isIdUnique = repository.GetCartById(cart.Id) == null;
+                        isIdUnique = cartRepository.GetCartById(cart.Id) == null;
                 }
                 while (!isIdUnique);
 
@@ -66,13 +54,13 @@ namespace StreetStuff_Shop.BLL.DI
                 cart.UserId = UserId;
                 cart.Quantity = 1;
 
-                repository.AddCart(cart);
+                cartRepository.AddCart(cart);
             
         }
 
         public void ChangeQuantity(int id, int quantity)
         {
-            Cart? cart = repository.GetCartById(id);
+            Cart? cart = cartRepository.GetCartById(id);
             cart.Quantity = quantity;
         }
 
@@ -84,7 +72,7 @@ namespace StreetStuff_Shop.BLL.DI
             while (attemptCount < maxAttempts)
             {
                 int newId = new Random().Next(1, int.MaxValue);
-                if (repository.GetCartById(newId) == null)
+                if (cartRepository.GetCartById(newId) == null)
                     return newId;
 
                 attemptCount++;
@@ -92,46 +80,28 @@ namespace StreetStuff_Shop.BLL.DI
 
             return 0;
         }
-
-
-
-        public int GetUniqueLikedId()
+        public List<Product> GetProducts()
         {
-            Random random = new Random();
-            int maxAttempts = 100;
-            int attemptCount = 0;
-
-            while (attemptCount < maxAttempts)
-            {
-                int newId = random.Next(1, int.MaxValue);
-                Cart cart = repository.GetCart(newId);
-
-                if (cart == null)
-                    return newId;
-
-                attemptCount++;
-            }
-
-            return 0;
+            return productRepository.GetProducts();
         }
 
         public void MinusQuantity(int id)
         {
-            Cart? cart = repository.GetCartById(id);
+            Cart? cart = cartRepository.GetCartById(id);
             cart.Quantity--;
-            repository.SaveChanges();
+            likedRepository.SaveChanges();
         }
 
         public void RemoveFromBasket(Cart cart)
         {
-            repository.RemoveFromBasket(cart);
+            cartRepository.RemoveFromCart(cart);
         }
 
         public void RemoveProductFromLiked(Liked liked)
         {
-            repository.RemoveProductFromLiked(liked);
+            likedRepository.RemoveProductFromLiked(liked);
         }
 
-        
+       
     }
 }

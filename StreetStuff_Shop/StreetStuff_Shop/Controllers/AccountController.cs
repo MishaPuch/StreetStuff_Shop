@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StreetStuff_Shop.BLL.Interfaces;
-using StreetStuff_Shop.DAL;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
@@ -15,14 +15,14 @@ namespace StreetStuff_Shop.Controllers
         private IUserService userService;
         private ISessionService sessionService;
         private IProductService productService;
-        private IRepository repository;
+        private ILikedService likedService;
 
-        public AccountController(IUserService userService, ISessionService sessionService , IProductService productService, IRepository repository) 
+        public AccountController(IUserService userService, ISessionService sessionService , IProductService productService, ILikedService likedService) 
         { 
             this.userService = userService;
             this.sessionService = sessionService;
             this.productService = productService;   
-            this.repository = repository;
+            this.likedService = likedService;
         }
 
         public ActionResult Login()
@@ -32,7 +32,7 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
-            User? user = repository.GetUser(login.email, login.password);
+            User? user = userService.GetUser(login.email, login.password);
             if (user != null)
             {
                 sessionService.RegistrUserInSession(user);
@@ -50,11 +50,11 @@ namespace StreetStuff_Shop.Controllers
         }
 
         // GET: AccountController/Details/5
-        public async Task<ActionResult> Profile()
+        public ActionResult Profile()
         {
             ProfileViewModel profile = new ProfileViewModel();
-            profile.products=await repository.GetProducts();
-            profile.liked=await repository.GetAllLikedProducts();
+            profile.products= productService.GetProducts();
+            profile.liked= likedService.GetAllLikedProducts();
 
             return View(profile);
         }
@@ -62,10 +62,10 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
         {
-            Liked liked = repository.GetLikedById(ProductId, UserId);
+            Liked liked = likedService.GetLikedById(ProductId, UserId);
             if (liked != null)
             {
-                productService.RemoveProductFromLiked(liked);
+                likedService.RemoveProductFromLiked(liked);
             }
             return Redirect("Profile");
         }
@@ -73,11 +73,11 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddProductToLiked(int ProductId, int UserId)
         {
-            Liked liked = repository.GetLikedById(ProductId, UserId);
+            Liked liked = likedService.GetLikedById(ProductId, UserId);
 
             if (liked == null)
             {
-                productService.AddProductToLiked(ProductId, UserId);              
+                likedService.AddProductToLiked(ProductId, UserId);              
             }
 
             return RedirectToAction("Profile");
@@ -98,7 +98,7 @@ namespace StreetStuff_Shop.Controllers
                 {
                     User user1 = new User()
                     {
-                        Id = repository.GetUserCount() + 1,
+                        Id = userService.GetUserCount() + 1,
                         Email = user.Email,
                         Password = user.Password,
                         Photo = user.Photo,

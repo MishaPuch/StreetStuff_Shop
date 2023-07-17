@@ -195,9 +195,6 @@
             "projectReferences": {
               "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj": {
                 "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj"
-              },
-              "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj": {
-                "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj"
               }
             }
           }

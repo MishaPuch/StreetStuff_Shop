@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StreetStuff_Shop.BLL.Interfaces;
-using StreetStuff_Shop.DAL;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
 using StreetStuff_Shop.ViewModels;
@@ -13,20 +13,25 @@ namespace StreetStuff_Shop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IProductService productService;
-        private IRepository repository;
+        private IUserService userService;
+        private ISessionService sessionService;
+        private ICartServicecs cartServicecs;
+        private ILikedService likedService;
 
-
-        public HomeController(ILogger<HomeController> logger, IProductService productService, IRepository repository)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, IUserService userService, ISessionService sessionService, ICartServicecs cartServicecs, ILikedService likedService)
         {
             _logger = logger;
             this.productService = productService;
-            this.repository = repository;
+            this.userService = userService;
+            this.sessionService = sessionService;
+            this.cartServicecs = cartServicecs;
+            this.likedService = likedService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             IndexViewModel model = new IndexViewModel();
-            model.products =await repository.GetProducts();
+            model.products =productService.GetProducts();
             return View(model);
         }
 
@@ -38,8 +43,8 @@ namespace StreetStuff_Shop.Controllers
         public async Task<ActionResult> Basket()
         {
             BasketViewModel model = new BasketViewModel();
-            model.products =await repository.GetProducts();
-            model.carts = await repository.GetCarts();
+            model.products =productService.GetProducts();
+            model.carts = cartServicecs.GetCarts();
 
             return View(model);
         }
@@ -47,10 +52,10 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult AddToBasket(int UserId, int ProductId)
         {
-            Cart cart =repository.GetCartById(ProductId,UserId);
+            Cart cart =cartServicecs.GetCartById(ProductId,UserId);
             if ( cart == null)
             {
-                productService.AddToBasket(UserId, ProductId);
+                cartServicecs.AddToCart(UserId, ProductId);
             }
 
             return RedirectToAction("Basket");
@@ -62,8 +67,8 @@ namespace StreetStuff_Shop.Controllers
         [HttpPost]
         public ActionResult RemoveFromBasket(int id)
         {
-            Cart ? cart =repository.GetCartById(id);
-            productService.RemoveFromBasket(cart);
+            Cart ? cart =cartServicecs.GetCartById(id);
+            cartServicecs.RemoveFromCart(cart);
 
             return Redirect("Basket");
         }

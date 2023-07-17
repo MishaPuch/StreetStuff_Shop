@@ -6,9 +6,11 @@ using NUnit.Framework;
 using StreetStuff_Shop;
 using StreetStuff_Shop.BLL.DI;
 using StreetStuff_Shop.BLL.Interfaces;
-using StreetStuff_Shop.DAL;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
+using StreetStuff_Shop.DAL.RepositoriumsService;
 using StreetStuff_Shop.DI;
 using StreetStuff_Shop.Interfaces;
+using StreetStuff_Shop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +23,16 @@ string connectionString = configuration.GetSection("Data").Value;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<IDbContext , StreetStuff_Shop.DI.DbContext>(ConnectionString);
-builder.Services.AddTransient<IRepository, Repository>();
+builder.Services.AddTransient<IRepositoryLiked, RepositoryLiked>();
+builder.Services.AddTransient<IRepositoryUsers, RepositoryUser>();
+builder.Services.AddTransient<IRepositoryCarts, RepositoryCarts>();
+builder.Services.AddTransient<IRepositoryProducts, RepositoryProducts>();
+
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICartServicecs, CartServicecs>();
+builder.Services.AddTransient<ILikedService, LikedService>();
+
 builder.Services.AddTransient<ISessionService, SessionService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();

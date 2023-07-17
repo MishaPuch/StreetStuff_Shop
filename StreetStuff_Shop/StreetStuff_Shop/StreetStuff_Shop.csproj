@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StreetStuff_Shop.BLL\StreetStuff_Shop.BLL.csproj" />
-    <ProjectReference Include="..\StreetStuff_Shop.DAL\StreetStuff_Shop.DAL.csproj" />
   </ItemGroup>
 
 </Project>

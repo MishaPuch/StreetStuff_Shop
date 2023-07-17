@@ -3784,8 +3784,7 @@
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
       "NUnit >= 3.13.3",
       "Newtonsoft.Json >= 13.0.3",
-      "StreetStuff_Shop.BLL >= 1.0.0",
-      "StreetStuff_Shop.DAL >= 1.0.0"
+      "StreetStuff_Shop.BLL >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3818,9 +3817,6 @@
           "projectReferences": {
             "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj": {
               "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.BLL\\StreetStuff_Shop.BLL.csproj"
-            },
-            "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj": {
-              "projectPath": "C:\\Users\\misha\\Desktop\\StreetStuff_Shop\\StreetStuff_Shop\\StreetStuff_Shop.DAL\\StreetStuff_Shop.DAL.csproj"
             }
           }
         }

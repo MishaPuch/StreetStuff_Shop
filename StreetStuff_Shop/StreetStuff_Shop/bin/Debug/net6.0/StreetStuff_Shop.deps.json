@@ -15,8 +15,7 @@
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "NUnit": "3.13.3",
           "Newtonsoft.Json": "13.0.3",
-          "StreetStuff_Shop.BLL": "1.0.0",
-          "StreetStuff_Shop.DAL": "1.0.0"
+          "StreetStuff_Shop.BLL": "1.0.0"
         },
         "runtime": {
           "StreetStuff_Shop.dll": {}
