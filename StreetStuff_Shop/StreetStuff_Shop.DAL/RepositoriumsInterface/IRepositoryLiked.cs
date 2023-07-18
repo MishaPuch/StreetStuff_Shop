@@ -10,12 +10,12 @@ namespace StreetStuff_Shop.DAL.RepositoriumsInterface
 {
     public interface IRepositoryLiked
     {
-        public Liked GetLikedById(int ProductId, int UserId);     
-        public IEnumerable<Liked>? GetAllLikedProducts();
-        public void AddLiked(Liked liked);
-        public void SaveChanges();
-        public void RemoveProductFromLiked(Liked liked);
-        public int GetUniqueLikedId();
+        public Task<Liked> GetLikedById(int ProductId, int UserId);     
+        public Task<IEnumerable<Liked>>? GetAllLikedProducts();
+        public Task AddLiked(Liked liked);
+        public Task SaveChanges();
+        public Task RemoveProductFromLiked(Liked liked);
+        public Task<int> GetUniqueLikedId();
 
 
 

@@ -23,22 +23,22 @@ namespace StreetStuff_Shop.BLL.DI
             this.productRepository = productRepository;
             this.userRepository = userRepository;
         }
-        public void AddCart(Cart cart)
+        public async Task AddCart(Cart cart)
         {
-            cartRepository.AddCart(cart);
+            await cartRepository.AddCart(cart);
         }
 
-        public void AddToCart(int UserId, int ProductId)
+        public async Task AddToCart(int UserId, int ProductId)
         {
 
-            Cart cart = new Cart();
+            var cart = new Cart();
             bool isIdUnique = false;
 
             do
             {
-                cart.Id = GenerateUniqueCartId();
+                cart.Id = await GenerateUniqueCartId();
                 if (cart.Id > 0)
-                    isIdUnique = cartRepository.GetCartById(cart.Id) == null;
+                isIdUnique =await cartRepository.GetCartById(cart.Id) == null;
             }
             while (!isIdUnique);
 
@@ -46,37 +46,37 @@ namespace StreetStuff_Shop.BLL.DI
             cart.UserId = UserId;
             cart.Quantity = 1;
 
-            cartRepository.AddCart(cart);
+            await cartRepository.AddCart(cart);
         }
 
-        public int GenerateUniqueCartId()
+        public async Task<int> GenerateUniqueCartId()
         {
-            return cartRepository.GetUniqueCartId();
+            return await cartRepository.GetUniqueCartId();
         }
 
-        public Cart GetCart(int id)
+        public async Task<Cart> GetCart(int id)
         {
-            return cartRepository.GetCart(id);
+            return await cartRepository.GetCart(id);
         }
 
-        public Cart? GetCartById(int CartId)
+        public async Task<Cart>? GetCartById(int CartId)
         {
-            return cartRepository.GetCartById(CartId);
+            return await cartRepository.GetCartById(CartId);
         }
 
-        public Cart? GetCartById(int ProductId, int UserId)
+        public async Task<Cart>? GetCartById(int ProductId, int UserId)
         {
-            return cartRepository.GetCartById(ProductId, UserId);
+            return await cartRepository.GetCartById(ProductId, UserId);
         }
 
-        public List<Cart> GetCarts()
+        public async Task<List<Cart>> GetCarts()
         {
-            return cartRepository.GetCarts();
+            return await cartRepository.GetCarts();
         }
 
-        public void RemoveFromCart(Cart cart)
+        public async Task RemoveFromCart(Cart cart)
         {
-            cartRepository.RemoveFromCart(cart);
-        }
+            await cartRepository.RemoveFromCart(cart);
+        }        
     }
 }

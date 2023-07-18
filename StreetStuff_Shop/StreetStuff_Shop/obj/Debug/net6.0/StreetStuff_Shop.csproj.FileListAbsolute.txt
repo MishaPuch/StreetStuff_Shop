@@ -368,3 +368,4 @@ C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\obj\De
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\obj\Debug\net6.0\ref\StreetStuff_Shop.dll
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.BLL.dll
 C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\StreetStuff_Shop.BLL.pdb
+C:\Users\misha\Desktop\StreetStuff_Shop\StreetStuff_Shop\StreetStuff_Shop\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll

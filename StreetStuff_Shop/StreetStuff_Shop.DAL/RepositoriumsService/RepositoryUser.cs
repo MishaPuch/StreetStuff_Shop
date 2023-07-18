@@ -1,4 +1,5 @@
-﻿using StreetStuff_Shop.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,31 +15,31 @@ namespace StreetStuff_Shop.DAL.RepositoriumsInterface
         {
             this.db = db;
         }
-        public User GetUser(string email, string password)
+        public async Task<User> GetUser(string email, string password)
         {
-            return db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            return await db.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return db.Users.FirstOrDefault(u => u.Id == id);
+            return await db.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public void CreateUser(User user)
+        public async Task CreateUser(User user)
         {
             db.Users.Add(user);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
         }
 
-        public void ChangeUser(User user)
+        public async Task ChangeUser(User user)
         {
             User ChangedUser = db.Users.FirstOrDefault(u => u.Id == user.Id);
             ChangedUser = user;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
-        public int GetUserCount()
+        public async Task<int> GetUserCount()
         {
-            return db.Users.Count();
+            return await db.Users.CountAsync();
         }
 
     }

@@ -4,12 +4,11 @@ namespace StreetStuff_Shop.Interfaces
 {
     public interface IUserService
     {
-        public void CreateUser(User user);
-        
-        public void ChangeUser(User user);
-        public User GetUser(string email, string password);
-        public User GetUserById(int id);        
-        public int GetUserCount();
+        public Task CreateUser(User user);        
+        public Task ChangeUser(User user);
+        public Task<User> GetUser(string email, string password);
+        public Task<User> GetUserById(int id);        
+        public Task<int> GetUserCount();
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using StreetStuff_Shop.DAL.RepositoriumsInterface;
+﻿using Microsoft.EntityFrameworkCore;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
 using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
@@ -15,35 +16,35 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
         {
             this.db = db;
         }
-        public Cart? GetCartById(int ProductId, int UserId)
+        public async Task<Cart>? GetCartById(int ProductId, int UserId)
         {
-            return db.Carts.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
+            return await db.Carts.FirstOrDefaultAsync(p => p.ProductId == ProductId && p.UserId == UserId);
         }
 
-        public List<Cart> GetCarts()
+        public async Task<List<Cart>> GetCarts()
         {
-            return db.Carts.ToList();
+            return await db.Carts.ToListAsync();
         }
 
-        public Cart GetCartById(int id)
+        public async Task<Cart> GetCartById(int id)
         {
-            return db.Carts.Find(id);
+            return await db.Carts.FindAsync(id); 
         }
-        public void AddCart(Cart cart)
+        public async Task AddCart(Cart cart)
         {
             db.Carts.Add(cart);
-            db.SaveChanges();
+            db.SaveChangesAsync();
         }
-        public void RemoveFromCart(Cart cart)
+        public async Task RemoveFromCart(Cart cart)
         {
             db.Carts.Remove(cart);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
-        public Cart GetCart(int newId)
+        public async Task<Cart> GetCart(int newId)
         {
-            return db.Carts.FirstOrDefault(c => c.Id == newId);
+            return await db.Carts.FirstOrDefaultAsync(c => c.Id == newId);
         }
-        public int GetUniqueCartId()
+        public async Task<int> GetUniqueCartId()
         {
             Random random = new Random();
             int maxAttempts = 100;
@@ -52,7 +53,7 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
             while (attemptCount < maxAttempts)
             {
                 int newId = random.Next(1, int.MaxValue);
-                Cart cart = GetCart(newId);
+                var cart =await GetCart(newId);
 
                 if (cart == null)
                     return newId;

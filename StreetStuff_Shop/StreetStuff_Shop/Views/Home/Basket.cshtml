@@ -2,8 +2,8 @@
 @{
     Layout = null;
     User? user = WebUserService.GetUserFromSession();
-    IEnumerable<Product> products = Model.products;
-    IEnumerable<Cart> carts = Model.carts;
+    IEnumerable<Product> products = Model.Products;
+    IEnumerable<Cart> carts = Model.Carts;
     decimal? sum = 0;
 }
 

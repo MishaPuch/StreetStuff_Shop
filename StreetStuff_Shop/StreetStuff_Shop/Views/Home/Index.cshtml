@@ -4,7 +4,7 @@
 @{
 
     ViewData["Title"] = "Home Page";
-    IEnumerable<Product> products = Model.products;
+    IEnumerable<Product> products = Model.Products;
     User? user = null;
     user = WebUserService.GetUserFromSession();
 }

@@ -28,10 +28,10 @@ namespace StreetStuff_Shop.Controllers
             this.likedService = likedService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             IndexViewModel model = new IndexViewModel();
-            model.products =productService.GetProducts();
+            model.Products =await productService.GetProducts();
             return View(model);
         }
 
@@ -43,32 +43,30 @@ namespace StreetStuff_Shop.Controllers
         public async Task<ActionResult> Basket()
         {
             BasketViewModel model = new BasketViewModel();
-            model.products =productService.GetProducts();
-            model.carts = cartServicecs.GetCarts();
+            model.Products =await productService.GetProducts();
+            model.Carts = await cartServicecs.GetCarts();
 
             return View(model);
         }
-        //........................................................................
         [HttpPost]
-        public ActionResult AddToBasket(int UserId, int ProductId)
+        public async Task<ActionResult> AddToBasket(int UserId, int ProductId)
         {
-            Cart cart =cartServicecs.GetCartById(ProductId,UserId);
+            var cart = await cartServicecs.GetCartById(ProductId,UserId);
             if ( cart == null)
             {
-                cartServicecs.AddToCart(UserId, ProductId);
+                await cartServicecs.AddToCart(UserId, ProductId);
             }
 
             return RedirectToAction("Basket");
 
         }
-        //........................................................................
        
 
         [HttpPost]
-        public ActionResult RemoveFromBasket(int id)
+        public async Task<ActionResult> RemoveFromBasket(int id)
         {
-            Cart ? cart =cartServicecs.GetCartById(id);
-            cartServicecs.RemoveFromCart(cart);
+            var cart =await cartServicecs.GetCartById(id);
+            await cartServicecs.RemoveFromCart(cart);
 
             return Redirect("Basket");
         }

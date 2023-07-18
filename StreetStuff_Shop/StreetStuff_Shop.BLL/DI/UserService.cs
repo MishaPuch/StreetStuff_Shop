@@ -21,29 +21,29 @@ namespace StreetStuff_Shop.DI
             this.repositoryLiked = repositoryLiked;
         }
                
-        public void ChangeUser(User user)
+        public async Task ChangeUser(User user)
         {
-            repositoryUsers.ChangeUser(user);
+            await repositoryUsers.ChangeUser(user);
         }
 
-        public void CreateUser(User user)
+        public async Task CreateUser(User user)
         {
-            repositoryUsers.CreateUser(user);
+            await repositoryUsers.CreateUser(user);
         }
 
-        public User GetUser(string email, string password)
+        public async Task<User> GetUser(string email, string password)
         {
-            return repositoryUsers.GetUser(email, password);
+            return await repositoryUsers.GetUser(email, password);
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return repositoryUsers.GetUserById(id);
+            return await repositoryUsers.GetUserById(id);
         }
 
-        public int GetUserCount()
+        public async Task<int> GetUserCount()
         {
-            return repositoryUsers.GetUserCount();
+            return await repositoryUsers.GetUserCount();
         }
     }
 }

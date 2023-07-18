@@ -9,11 +9,11 @@ namespace StreetStuff_Shop.BLL.Interfaces
 {
     public interface ILikedService
     {
-        public void RemoveProductFromLiked(Liked liked);
-        public void AddProductToLiked(int ProductId, int UserId);
-        public Liked GetLikedById(int ProductId, int UserId);
-        public IEnumerable<Liked>? GetAllLikedProducts();
-        public void AddLiked(Liked liked);
-        public void SaveChanges();
+        public Task RemoveProductFromLiked(Liked liked);
+        public Task AddProductToLiked(int ProductId, int UserId);
+        public Task<Liked> GetLikedById(int ProductId, int UserId);
+        public Task<IEnumerable<Liked>>? GetAllLikedProducts();
+        public Task AddLiked(Liked liked);
+        public Task SaveChanges();
     }
 }

@@ -4,6 +4,6 @@ namespace StreetStuff_Shop.ViewModels
 {
     public class IndexViewModel
     {
-        public IEnumerable<Product> products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
     }
 }

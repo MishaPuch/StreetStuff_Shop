@@ -9,7 +9,7 @@ namespace StreetStuff_Shop.DAL.RepositoriumsInterface
 {
     public interface IRepositoryProducts
     {
-        public List<Product> GetProducts();
+        public Task<List<Product>> GetProducts();
 
     }
 }

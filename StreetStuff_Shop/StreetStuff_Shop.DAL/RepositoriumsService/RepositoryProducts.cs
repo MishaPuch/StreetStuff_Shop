@@ -1,4 +1,5 @@
-﻿using StreetStuff_Shop.DAL.RepositoriumsInterface;
+﻿using Microsoft.EntityFrameworkCore;
+using StreetStuff_Shop.DAL.RepositoriumsInterface;
 using StreetStuff_Shop.Models;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
         {
             this.db = db;
         }
-        public List<Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            return db.Products.ToList();
+            return await db.Products.ToListAsync();
         }
         
     }

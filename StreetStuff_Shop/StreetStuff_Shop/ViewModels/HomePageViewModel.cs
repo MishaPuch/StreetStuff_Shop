@@ -4,7 +4,7 @@ namespace StreetStuff_Shop.ViewModels
 {
     public class HomePageViewModel
     {
-        IEnumerable<Product>? Products { get; set; }
+        public IEnumerable<Product>? Products { get; set; }
 
     }
 }

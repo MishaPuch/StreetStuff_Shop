@@ -24,50 +24,52 @@ namespace StreetStuff_Shop.BLL.DI
             this.productRepository = productRepository;
             this.userRepository = userRepository;
         }
-        public void AddLiked(Liked liked)
+        public async Task AddLiked(Liked liked)
         {
-            likedRepository.AddLiked(liked);
+            await likedRepository.AddLiked(liked);
         }
 
-        public void AddProductToLiked(int ProductId, int UserId)
+        public async Task AddProductToLiked(int ProductId, int UserId)
         {
-           
-                Liked liked = new Liked();
-                bool isIdUnique = false;
 
-                do
-                {
-                    liked.Id = likedRepository.GetUniqueLikedId();
-                    if (liked.Id > 0)
-                        isIdUnique = likedRepository.GetLikedById(liked.Id, UserId) == null;
-                }
-                while (!isIdUnique);
+            var liked = new Liked();
+            bool isIdUnique = false;
 
-                liked.ProductId = ProductId;
-                liked.UserId = UserId;
+            do
+            {
+                liked.Id = await likedRepository.GetUniqueLikedId();
+                if (liked.Id > 0)
+                     
+                 if(await likedRepository.GetLikedById(liked.Id, UserId) == null) 
+                        isIdUnique = true;
+            }
+            while (!isIdUnique);
 
-                likedRepository.AddLiked(liked);
-                        
+            liked.ProductId = ProductId;
+            liked.UserId = UserId;
+
+            await likedRepository.AddLiked(liked);
+
         }
 
-        public IEnumerable<Liked>? GetAllLikedProducts()
+        public async Task<IEnumerable<Liked>>? GetAllLikedProducts()
         {
-            return likedRepository.GetAllLikedProducts();
+            return await likedRepository.GetAllLikedProducts();
         }
 
-        public Liked GetLikedById(int ProductId, int UserId)
+        public async Task<Liked> GetLikedById(int ProductId, int UserId)
         {
-            return likedRepository.GetLikedById(ProductId, UserId);
+            return await likedRepository.GetLikedById(ProductId, UserId);
         }
 
-        public void RemoveProductFromLiked(Liked liked)
+        public async Task RemoveProductFromLiked(Liked liked)
         {
-            likedRepository.RemoveProductFromLiked(liked);
+            await likedRepository.RemoveProductFromLiked(liked);
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            likedRepository.SaveChanges();
+            await likedRepository.SaveChanges();
         }
     }
 }

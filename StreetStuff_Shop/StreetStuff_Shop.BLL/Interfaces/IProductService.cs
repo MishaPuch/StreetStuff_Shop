@@ -9,10 +9,10 @@ namespace StreetStuff_Shop.BLL.Interfaces
 {
     public interface IProductService
     {        
-        public void AddQuantity(int id);
-        public void MinusQuantity(int id);
-        public void ChangeQuantity(int id, int quantity);
-        public List<Product> GetProducts();
+        public Task AddQuantity(int id);
+        public Task MinusQuantity(int id);
+        public Task ChangeQuantity(int id, int quantity);
+        public Task<List<Product>> GetProducts();
 
 
 

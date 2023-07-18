@@ -27,9 +27,9 @@ namespace StreetStuff_Shop.BLL.DI
         }
        
 
-        public void AddQuantity(int id)
+        public async Task AddQuantity(int id)
         {
-            Cart? cart = cartRepository.GetCartById(id);
+            Cart cart = await cartRepository.GetCartById(id);
             cart.Quantity++;
             likedRepository.SaveChanges();
 
@@ -38,29 +38,29 @@ namespace StreetStuff_Shop.BLL.DI
 
         public void AddToBasket(int UserId, int ProductId)
         {
-            
-                Cart cart = new Cart();
-                bool isIdUnique = false;
 
-                do
-                {
-                    cart.Id = GenerateUniqueCartId();
-                    if (cart.Id > 0)
-                        isIdUnique = cartRepository.GetCartById(cart.Id) == null;
-                }
-                while (!isIdUnique);
+            var cart = new Cart();
+            bool isIdUnique = false;
 
-                cart.ProductId = ProductId;
-                cart.UserId = UserId;
-                cart.Quantity = 1;
+            do
+            {
+                cart.Id = GenerateUniqueCartId();
+                if (cart.Id > 0)
+                    isIdUnique = cartRepository.GetCartById(cart.Id) == null;
+            }
+            while (!isIdUnique);
 
-                cartRepository.AddCart(cart);
-            
+            cart.ProductId = ProductId;
+            cart.UserId = UserId;
+            cart.Quantity = 1;
+
+            cartRepository.AddCart(cart);
+
         }
 
-        public void ChangeQuantity(int id, int quantity)
+        public async Task ChangeQuantity(int id, int quantity)
         {
-            Cart? cart = cartRepository.GetCartById(id);
+            Cart cart = await cartRepository.GetCartById(id);
             cart.Quantity = quantity;
         }
 
@@ -80,14 +80,14 @@ namespace StreetStuff_Shop.BLL.DI
 
             return 0;
         }
-        public List<Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            return productRepository.GetProducts();
+            return await productRepository.GetProducts();
         }
 
-        public void MinusQuantity(int id)
+        public async Task MinusQuantity(int id)
         {
-            Cart? cart = cartRepository.GetCartById(id);
+            Cart cart =await cartRepository.GetCartById(id);
             cart.Quantity--;
             likedRepository.SaveChanges();
         }

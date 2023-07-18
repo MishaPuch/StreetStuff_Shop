@@ -30,9 +30,9 @@ namespace StreetStuff_Shop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(LoginViewModel login)
+        public async Task<ActionResult> Login(LoginViewModel login)
         {
-            User? user = userService.GetUser(login.email, login.password);
+            var user =await userService.GetUser(login.Email, login.Password);
             if (user != null)
             {
                 sessionService.RegistrUserInSession(user);
@@ -50,39 +50,37 @@ namespace StreetStuff_Shop.Controllers
         }
 
         // GET: AccountController/Details/5
-        public ActionResult Profile()
+        public async Task<ActionResult> Profile()
         {
-            ProfileViewModel profile = new ProfileViewModel();
-            profile.products= productService.GetProducts();
-            profile.liked= likedService.GetAllLikedProducts();
+            var profile = new ProfileViewModel();
+            profile.Products= await productService.GetProducts();
+            profile.Liked= await likedService.GetAllLikedProducts();
 
             return View(profile);
         }
         
         [HttpPost]
-        public ActionResult RemoveProductFromLiked(int ProductId, int UserId)
+        public async Task<ActionResult> RemoveProductFromLiked(int ProductId, int UserId)
         {
-            Liked liked = likedService.GetLikedById(ProductId, UserId);
+            var liked =await likedService.GetLikedById(ProductId, UserId);
             if (liked != null)
             {
-                likedService.RemoveProductFromLiked(liked);
+                await likedService.RemoveProductFromLiked(liked);
             }
             return Redirect("Profile");
         }
-        //.....................................................................
         [HttpPost]
-        public ActionResult AddProductToLiked(int ProductId, int UserId)
+        public async Task<ActionResult> AddProductToLiked(int ProductId, int UserId)
         {
-            Liked liked = likedService.GetLikedById(ProductId, UserId);
+            var liked = await likedService.GetLikedById(ProductId, UserId);
 
             if (liked == null)
             {
-                likedService.AddProductToLiked(ProductId, UserId);              
+                await likedService.AddProductToLiked(ProductId, UserId);              
             }
 
             return RedirectToAction("Profile");
         }             
-        //......................................................................
 
         // GET: AccountController/Create
         public ActionResult CreateAccount()
@@ -90,15 +88,15 @@ namespace StreetStuff_Shop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateAccount(CreateUserViewModel user)
+        public async Task<ActionResult> CreateAccount(CreateUserViewModel user)
         {
             if(user != null)
             {
                 if (user.Password == user.ConfirmPassword)
                 {
-                    User user1 = new User()
+                    var user1 = new User()
                     {
-                        Id = userService.GetUserCount() + 1,
+                        Id = await userService.GetUserCount() + 1,
                         Email = user.Email,
                         Password = user.Password,
                         Photo = user.Photo,
@@ -108,7 +106,7 @@ namespace StreetStuff_Shop.Controllers
                         PhoneNumber = user.PhoneNumber
                     };
                     
-                    userService.CreateUser(user1);
+                    await userService.CreateUser(user1);
                     sessionService.RegistrUserInSession(user1);
                     return RedirectToAction("Index", "Home");
                 }

@@ -17,39 +17,39 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
         {
             this.db = db;
         }
-        public Liked GetLikedById(int ProductId, int UserId)
+        public async Task<Liked> GetLikedById(int ProductId, int UserId)
         {
-            return db.Liked.FirstOrDefault(p => p.ProductId == ProductId && p.UserId == UserId);
+            return await db.Liked.FirstOrDefaultAsync(p => p.ProductId == ProductId && p.UserId == UserId);
         }       
 
-        public IEnumerable<Liked>? GetAllLikedProducts()
+        public async Task<IEnumerable<Liked>>? GetAllLikedProducts()
         {
-            return db.Liked.ToList();
+            return await db.Liked.ToListAsync();
         }                
 
-        public Liked? GetLikedById(int likedId)
+        public async Task<Liked?> GetLikedById(int likedId)
         {
-            return db.Liked.Find(likedId);
+            return await db.Liked.FindAsync(likedId);
         }
 
-        public void AddLiked(Liked liked)
+        public async Task AddLiked(Liked liked)
         {
             db.Liked.Add(liked);
-            db.SaveChanges();
+            db.SaveChangesAsync();
         }             
 
-        public void RemoveProductFromLiked(Liked liked)
+        public async Task RemoveProductFromLiked(Liked liked)
         {
 
             db.Liked.Remove(liked);
-            db.SaveChanges();
+            db.SaveChangesAsync();
         }
        
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
-        public int GetUniqueLikedId()
+        public async Task<int> GetUniqueLikedId()
         {
             Random random = new Random();
             int maxAttempts = 100;
@@ -58,10 +58,10 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
             while (attemptCount < maxAttempts)
             {
                 int newId = random.Next(1, int.MaxValue);
-                Liked  cart = GetLikedById(newId);
+                Liked  cart = await GetLikedById(newId);
 
                 if (cart == null)
-                    return newId;
+                   return newId;
 
                 attemptCount++;
             }

@@ -4,7 +4,7 @@ namespace StreetStuff_Shop.ViewModels
 {
     public class BasketViewModel
     {
-        public IEnumerable<Product> ? products { get; set; }
-        public IEnumerable<Cart> ? carts { get; set; }
+        public IEnumerable<Product> ? Products { get; set; }
+        public IEnumerable<Cart> ? Carts { get; set; }
     }
 }

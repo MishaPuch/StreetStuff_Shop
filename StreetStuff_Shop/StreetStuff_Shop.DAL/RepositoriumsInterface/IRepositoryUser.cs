@@ -9,11 +9,11 @@ namespace StreetStuff_Shop.DAL.RepositoriumsInterface
 {
     public interface IRepositoryUsers
     {
-        public User GetUser(string email, string password);
-        public User GetUserById(int id);
-        public void CreateUser(User user);
-        public void ChangeUser(User user);
-        public int GetUserCount();
+        public Task<User> GetUser(string email, string password);
+        public Task<User> GetUserById(int id);
+        public Task CreateUser(User user);
+        public Task ChangeUser(User user);
+        public Task<int> GetUserCount();
 
     }
 }

@@ -4,7 +4,7 @@ namespace StreetStuff_Shop.ViewModels
 {
     public class ProfileViewModel
     {
-        public IEnumerable<Product>? products { get; set; }
-        public IEnumerable<Liked>? liked { get; set; } 
+        public IEnumerable<Product>? Products { get; set; }
+        public IEnumerable<Liked>? Liked { get; set; } 
     }
 }
