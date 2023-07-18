@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using StreetStuff_Shop.Interfaces;
 using StreetStuff_Shop.Models;
+using System.Text;
 
 namespace StreetStuff_Shop.DI
 {
@@ -12,6 +13,13 @@ namespace StreetStuff_Shop.DI
         {
             this.httpContextAccessor = httpContextAccessor;
 
+        }
+
+        public void SetString(string key, string value)
+        {
+            var session = httpContextAccessor.HttpContext.Session;
+
+            session.Set(key, Encoding.UTF8.GetBytes(value));
         }
         public User GetUserFromSession()
         {
@@ -34,6 +42,7 @@ namespace StreetStuff_Shop.DI
             var HttpContext = httpContextAccessor.HttpContext;
             HttpContext.Session.Clear();
 
-        }
+        }      
     }
 }
+*/

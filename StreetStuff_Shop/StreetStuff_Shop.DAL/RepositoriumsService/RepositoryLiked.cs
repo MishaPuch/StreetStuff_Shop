@@ -35,14 +35,14 @@ namespace StreetStuff_Shop.DAL.RepositoriumsService
         public async Task AddLiked(Liked liked)
         {
             db.Liked.Add(liked);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }             
 
         public async Task RemoveProductFromLiked(Liked liked)
         {
 
             db.Liked.Remove(liked);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
        
         public async Task SaveChanges()
